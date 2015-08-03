@@ -14,7 +14,10 @@
 		217ECC791B6D1101001E31F8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 217ECC781B6D1101001E31F8 /* Images.xcassets */; };
 		217ECC7C1B6D1101001E31F8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 217ECC7A1B6D1101001E31F8 /* LaunchScreen.xib */; };
 		217ECC881B6D1101001E31F8 /* TheAcceptableSequencerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 217ECC871B6D1101001E31F8 /* TheAcceptableSequencerTests.m */; };
-		217ECC931B6D131D001E31F8 /* AESequencer.m in Sources */ = {isa = PBXBuildFile; fileRef = 217ECC921B6D131D001E31F8 /* AESequencer.m */; };
+		217ECC931B6D131D001E31F8 /* AESequencerChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 217ECC921B6D131D001E31F8 /* AESequencerChannel.m */; };
+		21A0AC0C1B701AB800CF7DB2 /* Midis in Resources */ = {isa = PBXBuildFile; fileRef = 21A0AC0B1B701AB800CF7DB2 /* Midis */; };
+		21A0AC0E1B7021B100CF7DB2 /* Presets in Resources */ = {isa = PBXBuildFile; fileRef = 21A0AC0D1B7021B100CF7DB2 /* Presets */; };
+		21A0AC101B7022D300CF7DB2 /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = 21A0AC0F1B7022D300CF7DB2 /* Sounds */; };
 		781AE7EFCA29CD5003C52DDE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 25AE132F6892844DDF0CCBDC /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -44,8 +47,11 @@
 		217ECC811B6D1101001E31F8 /* TheAcceptableSequencerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheAcceptableSequencerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		217ECC861B6D1101001E31F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		217ECC871B6D1101001E31F8 /* TheAcceptableSequencerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TheAcceptableSequencerTests.m; sourceTree = "<group>"; };
-		217ECC911B6D131D001E31F8 /* AESequencer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESequencer.h; sourceTree = "<group>"; };
-		217ECC921B6D131D001E31F8 /* AESequencer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESequencer.m; sourceTree = "<group>"; };
+		217ECC911B6D131D001E31F8 /* AESequencerChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESequencerChannel.h; sourceTree = "<group>"; };
+		217ECC921B6D131D001E31F8 /* AESequencerChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESequencerChannel.m; sourceTree = "<group>"; };
+		21A0AC0B1B701AB800CF7DB2 /* Midis */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Midis; sourceTree = SOURCE_ROOT; };
+		21A0AC0D1B7021B100CF7DB2 /* Presets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Presets; sourceTree = SOURCE_ROOT; };
+		21A0AC0F1B7022D300CF7DB2 /* Sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sounds; sourceTree = SOURCE_ROOT; };
 		25AE132F6892844DDF0CCBDC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -95,11 +101,14 @@
 				217ECC701B6D1101001E31F8 /* AppDelegate.m */,
 				217ECC721B6D1101001E31F8 /* ViewController.h */,
 				217ECC731B6D1101001E31F8 /* ViewController.m */,
-				217ECC911B6D131D001E31F8 /* AESequencer.h */,
-				217ECC921B6D131D001E31F8 /* AESequencer.m */,
+				217ECC911B6D131D001E31F8 /* AESequencerChannel.h */,
+				217ECC921B6D131D001E31F8 /* AESequencerChannel.m */,
+				21A0AC0F1B7022D300CF7DB2 /* Sounds */,
+				21A0AC0D1B7021B100CF7DB2 /* Presets */,
+				21A0AC0B1B701AB800CF7DB2 /* Midis */,
 				217ECC751B6D1101001E31F8 /* Main.storyboard */,
-				217ECC781B6D1101001E31F8 /* Images.xcassets */,
 				217ECC7A1B6D1101001E31F8 /* LaunchScreen.xib */,
+				217ECC781B6D1101001E31F8 /* Images.xcassets */,
 				217ECC6B1B6D1101001E31F8 /* Supporting Files */,
 			);
 			path = TheAcceptableSequencer;
@@ -230,9 +239,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21A0AC101B7022D300CF7DB2 /* Sounds in Resources */,
+				21A0AC0E1B7021B100CF7DB2 /* Presets in Resources */,
 				217ECC771B6D1101001E31F8 /* Main.storyboard in Resources */,
 				217ECC7C1B6D1101001E31F8 /* LaunchScreen.xib in Resources */,
 				217ECC791B6D1101001E31F8 /* Images.xcassets in Resources */,
+				21A0AC0C1B701AB800CF7DB2 /* Midis in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,7 +296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				217ECC741B6D1101001E31F8 /* ViewController.m in Sources */,
-				217ECC931B6D131D001E31F8 /* AESequencer.m in Sources */,
+				217ECC931B6D131D001E31F8 /* AESequencerChannel.m in Sources */,
 				217ECC711B6D1101001E31F8 /* AppDelegate.m in Sources */,
 				217ECC6E1B6D1101001E31F8 /* main.m in Sources */,
 			);

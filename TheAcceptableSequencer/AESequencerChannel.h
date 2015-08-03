@@ -10,8 +10,19 @@
 #import "AEAudioUnitChannel.h"
 #import "AEAudioController.h"
 
-@interface AESequencer : AEAudioUnitChannel
+@interface AESequencerChannel : AEAudioUnitChannel
 
 - (instancetype)initWithAudioController:(AEAudioController*)audioController;
+
+// Load sequences.
+- (void)loadSequence:(MusicSequence)sequence;
+- (void)loadMidiFile:(NSURL*)fileURL;
+
+// Load sounds.
+- (void)loadPreset:(NSURL*)fileURL;
+
+// Playback.
+- (void)play;
+- (void)stop;
 
 @end

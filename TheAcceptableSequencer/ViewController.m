@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "AEAudioController.h"
-#import "AESequencer.h"
+#import "AESequencerChannel.h"
 
 @interface ViewController ()
 
@@ -23,11 +23,40 @@
     AEAudioController *audioController = [[AEAudioController alloc] initWithAudioDescription:[AEAudioController nonInterleavedFloatStereoAudioDescription]];
     NSError *error = nil;
     [audioController start:&error];
-    if(error) NSLog(@"-> AEAudioController start error: %@", error.localizedDescription);
-    else NSLog(@"-> AEAudioController started ok.");
+    if(error) NSLog(@"  AEAudioController start error: %@", error.localizedDescription);
+    else NSLog(@"  AEAudioController started ok.");
     
-    // Init sequencer.
-    AESequencer *sequencer = [[AESequencer alloc] initWithAudioController:audioController];
+    // Init the sequencer.
+    AESequencerChannel *sequencer = [[AESequencerChannel alloc] initWithAudioController:audioController];
+    [audioController addChannels:@[sequencer]];
+    
+    // Load a sequence.
+    NSURL *midiURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Midis/underfx" ofType:@"mid"]];
+    [sequencer loadMidiFile:midiURL];
+    
+    // Load sounds.
+    NSURL *presetURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Presets/Wacko" ofType:@"aupreset"]];
+    [sequencer loadPreset:presetURL];
+    
+    // Start the sequencer.
+    [sequencer play];
 }
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
