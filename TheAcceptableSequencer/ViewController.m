@@ -14,32 +14,39 @@
 
 @end
 
-@implementation ViewController
+@implementation ViewController {
+    AEAudioController *_audioController;
+    AESequencerChannel *_sequencer;
+}
+
+// ---------------------------------------------------------------------------------------------------------
+#pragma mark - LIFE CYCLE
+// ---------------------------------------------------------------------------------------------------------
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     // Init audio engine.
-    AEAudioController *audioController = [[AEAudioController alloc] initWithAudioDescription:[AEAudioController nonInterleavedFloatStereoAudioDescription]];
+    _audioController = [[AEAudioController alloc] initWithAudioDescription:[AEAudioController nonInterleavedFloatStereoAudioDescription]];
     NSError *error = nil;
-    [audioController start:&error];
+    [_audioController start:&error];
     if(error) NSLog(@"  AEAudioController start error: %@", error.localizedDescription);
     else NSLog(@"  AEAudioController started ok.");
     
     // Init the sequencer.
-    AESequencerChannel *sequencer = [[AESequencerChannel alloc] initWithAudioController:audioController];
-    [audioController addChannels:@[sequencer]];
+    _sequencer = [[AESequencerChannel alloc] initWithAudioController:_audioController];
+    [_audioController addChannels:@[_sequencer]];
     
     // Load a sequence.
-    NSURL *midiURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Midis/underfx" ofType:@"mid"]];
-    [sequencer loadMidiFile:midiURL];
+    NSURL *midiURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Midis/pattern1" ofType:@"mid"]];
+    [_sequencer loadMidiFile:midiURL];
     
     // Load sounds.
-    NSURL *presetURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Presets/Wacko" ofType:@"aupreset"]];
-    [sequencer loadPreset:presetURL];
+    NSURL *presetURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Presets/SimpleDrums" ofType:@"aupreset"]];
+    [_sequencer loadPreset:presetURL];
     
     // Start the sequencer.
-    [sequencer play];
+    [_sequencer play];
 }
 
 @end

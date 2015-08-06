@@ -59,6 +59,7 @@
     
     // Tell the sequence that it will be played by the sampler.
     CheckError(MusicSequenceSetAUGraph(_sequence, _audioController.audioGraph), "Error connecting sampler.");
+//    CAShow(_audioController.audioGraph);
     
     // Load the sequence on the player.
     MusicPlayerSetSequence(_player, _sequence);
@@ -70,46 +71,15 @@
 #pragma mark - LOAD PRESETS
 // ---------------------------------------------------------------------------------------------------------
 
-//- (void)loadPreset:(NSURL*)fileURL {
-//    
-//    // Read preset.
-//    const NSDataReadingOptions DataReadingOptions = 0;
-//    NSError * outError = nil;
-//    NSData * data = [NSData dataWithContentsOfURL:fileURL
-//                                          options:DataReadingOptions
-//                                            error:&outError];
-//    
-//    // Convert the data object into a property list
-//    CFPropertyListRef presetPropertyList = 0;
-//    CFPropertyListFormat dataFormat = 0;
-//    CFErrorRef errorRef = 0;
-//    presetPropertyList = CFPropertyListCreateWithData (kCFAllocatorDefault,
-//                                                       (__bridge CFDataRef)(data),
-//                                                       kCFPropertyListImmutable,
-//                                                       &dataFormat,
-//                                                       &errorRef);
-//    const bool status = nil != data;
-//    if(!status) {
-//        // oops - an error was encountered getting the data see `outError`
-//        NSLog(@"Error: %@", outError);
-//        return;
-//    }
-//    
-//    // Load preset.
-//    CheckError( AudioUnitSetProperty(self.audioUnit,
-//                                     kAudioUnitProperty_ClassInfo,
-//                                     kAudioUnitScope_Global,
-//                                     0,
-//                                     &presetPropertyList,
-//                                     sizeof(CFPropertyListRef)), "Error loading aupreset." );
-//}
-
 - (void)loadPreset:(NSURL*)fileURL {
     
     // Prepare preset object.
     AUSamplerInstrumentData auPreset = {0};
-    auPreset.fileURL = (__bridge CFURLRef)fileURL;
+    auPreset.fileURL = (__bridge CFURLRef)(fileURL);
+//    auPreset.bankMSB = kAUSampler_DefaultMelodicBankMSB;
+//    auPreset.bankLSB = kAUSampler_DefaultBankLSB;
     auPreset.instrumentType = kInstrumentType_AUPreset;
+//    auPreset.presetID = 0;
     
     // Load preset.
     CheckError(AudioUnitSetProperty(self.audioUnit,
@@ -117,7 +87,7 @@
                                     kAudioUnitScope_Global,
                                     0,
                                     &auPreset,
-                                    sizeof(auPreset)), "Error setting preset.");
+                                    sizeof(auPreset)), "Error loading preset.");
 }
 
 // ---------------------------------------------------------------------------------------------------------

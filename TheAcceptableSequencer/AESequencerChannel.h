@@ -20,6 +20,7 @@
 
 // Load sounds.
 - (void)loadPreset:(NSURL*)fileURL;
+- (void)loadBank:(NSURL*)bankURL withPatch:(int)presetNumber;
 
 // Playback.
 - (void)play;
