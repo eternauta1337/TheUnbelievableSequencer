@@ -15,18 +15,18 @@
     MusicPlayer _player;
     MusicSequence _sequence;
     BOOL _isPlaying;
-    float _resolution;
 }
 
 // ---------------------------------------------------------------------------------------------------------
 #pragma mark - INIT
 // ---------------------------------------------------------------------------------------------------------
 
-- (instancetype)initWithAudioController:(AEAudioController*)audioController andPatternResolution:(float)resolution {
+- (instancetype)initWithAudioController:(AEAudioController*)audioController withPatternResolution:(float)resolution withNumTracks:(int)numTracks {
     
     _audioController = audioController;
     _isPlaying = NO;
     _resolution = resolution;
+    _numTracks = numTracks;
     
     // Init as an AUSampler audio unit channel.
     AudioComponentDescription component = AEAudioComponentDescriptionMake(kAudioUnitManufacturer_Apple, kAudioUnitType_MusicDevice, kAudioUnitSubType_Sampler);
@@ -102,10 +102,9 @@
     // Sweep cells.
     MusicTimeStamp time = 0;
     MusicTimeStamp duration = 1.0;
-    int sectionCount = 10;
     int rowCount = _patternLengthInBeats / _resolution;
     for(int rowIndex = startTime; rowIndex < rowCount; rowIndex++) {
-        for(int sectionIndex = 0; sectionIndex < sectionCount; sectionIndex++) {
+        for(int sectionIndex = 0; sectionIndex < _numTracks; sectionIndex++) {
             
             // Id index path.
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:rowIndex inSection:sectionIndex];
@@ -125,8 +124,6 @@
 }
 
 - (void)musicSequenceToPattern {
-    
-    NSLog(@"musicSequenceToPattern()");
     
     // Get track 1. (0 is tempo).
     int trackIndex = 1;
@@ -165,9 +162,8 @@
             
             // Log note.         
             UInt8 note = message->note;
-            NSLog(@"note: %d", note);
             int noteSection = note - 36;
-            int noteRow = timestamp * (1/_resolution);
+            int noteRow = (int)(timestamp * (1/_resolution));
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:noteRow inSection:noteSection];
             _pattern[indexPath] = [NSNumber numberWithBool:YES];
         }
@@ -186,6 +182,10 @@
     return isOn;
 }
 
+- (int)numPulses {
+    return _patternLengthInBeats / _resolution;
+}
+
 // ---------------------------------------------------------------------------------------------------------
 #pragma mark - LOAD PRESETS
 // ---------------------------------------------------------------------------------------------------------
@@ -195,10 +195,7 @@
     // Prepare preset object.
     AUSamplerInstrumentData auPreset = {0};
     auPreset.fileURL = (__bridge CFURLRef)(fileURL);
-//    auPreset.bankMSB = kAUSampler_DefaultMelodicBankMSB;
-//    auPreset.bankLSB = kAUSampler_DefaultBankLSB;
     auPreset.instrumentType = kInstrumentType_AUPreset;
-//    auPreset.presetID = 0;
     
     // Load preset.
     CheckError(AudioUnitSetProperty(self.audioUnit,
@@ -223,6 +220,19 @@
     if(!_isPlaying) return;
     MusicPlayerStop(_player);
     _isPlaying = NO;
+}
+
+- (float)playbackPosition {
+    
+    // Get position.
+    MusicTimeStamp time;
+    CheckError(MusicPlayerGetTime(_player, &time), "Error getting position");
+    
+    // Calculate position in loop.
+    float loopPos = (float)time / (float)_patternLengthInBeats;
+    loopPos = loopPos - floorf(loopPos);
+    
+    return loopPos;
 }
 
 // ---------------------------------------------------------------------------------------------------------

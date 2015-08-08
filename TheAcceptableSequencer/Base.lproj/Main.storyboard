@@ -36,6 +36,10 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aoP-lK-69c">
+                                <rect key="frame" x="0.0" y="0.0" width="1" height="320"/>
+                                <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -43,6 +47,7 @@
                     <size key="freeformSize" width="568" height="320"/>
                     <connections>
                         <outlet property="collectionView" destination="c6f-b1-UwP" id="lk0-Ye-kNa"/>
+                        <outlet property="playheadView" destination="aoP-lK-69c" id="LdB-Xg-x6X"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

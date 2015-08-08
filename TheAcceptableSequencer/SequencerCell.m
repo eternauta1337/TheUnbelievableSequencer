@@ -9,12 +9,9 @@
 #import "SequencerCell.h"
 
 NSString *const SEQUENCER_CELL_NOTIFICATION_TOUCH_DOWN = @"SEQUENCER_CELL_NOTIFICATION_TOUCH_DOWN";
-NSString *const SEQUENCER_CELL_NOTIFICATION_TOUCH_UP = @"SEQUENCER_CELL_NOTIFICATION_TOUCH_UP";
 
 @implementation SequencerCell {
     UIColor *_color;
-    UIButton *_button;
-    BOOL _needsButtonSize;
 }
 
 // -------------------------------------------------------------------------------------------
@@ -24,36 +21,21 @@ NSString *const SEQUENCER_CELL_NOTIFICATION_TOUCH_UP = @"SEQUENCER_CELL_NOTIFICA
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    _needsButtonSize = YES;
-    
-    // Bg Color.
     self.enabled = NO;
     
-    // Interaction.
-    _button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-    [_button addTarget:self action:@selector(onTouchDown) forControlEvents:UIControlEventTouchDown];
-    [_button addTarget:self action:@selector(onTouchUp) forControlEvents:UIControlEventTouchUpInside];
-    [_button addTarget:self action:@selector(onTouchUp) forControlEvents:UIControlEventTouchUpOutside];
-    _button.backgroundColor = [UIColor clearColor];
-    [self.contentView addSubview:_button];
+    // Tap.
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap)];
+    [self addGestureRecognizer:tap];
 }
 
 // ---------------------------------------------------------------------------------------------------------
 #pragma mark - GESTURES
 // ---------------------------------------------------------------------------------------------------------
 
-- (void)onTouchDown {
+- (void)handleTap {
     
     // Notify.
     [[NSNotificationCenter defaultCenter] postNotificationName:SEQUENCER_CELL_NOTIFICATION_TOUCH_DOWN
-                                                        object:self
-                                                      userInfo:@{@"indexPath":_indexPath}];
-}
-
-- (void)onTouchUp {
-    
-    // Notify.
-    [[NSNotificationCenter defaultCenter] postNotificationName:SEQUENCER_CELL_NOTIFICATION_TOUCH_UP
                                                         object:self
                                                       userInfo:@{@"indexPath":_indexPath}];
 }
@@ -74,11 +56,6 @@ NSString *const SEQUENCER_CELL_NOTIFICATION_TOUCH_UP = @"SEQUENCER_CELL_NOTIFICA
 
 - (void)drawRect:(CGRect)rect {
     
-    if(_needsButtonSize) {
-        [self fitButton];
-        _needsButtonSize = NO;
-    }
-    
     // Draw bg square with border.
     float inflate = 1;
     CGRect rect1 = CGRectMake(inflate, inflate, rect.size.width - 2 * inflate, rect.size.height - 2 * inflate);
@@ -86,16 +63,6 @@ NSString *const SEQUENCER_CELL_NOTIFICATION_TOUCH_UP = @"SEQUENCER_CELL_NOTIFICA
     [_color setStroke];
     [_color setFill];
     CGContextFillRect(context, rect1);
-}
-
-// ---------------------------------------------------------------------------------------------------------
-#pragma mark - UTILS
-// ---------------------------------------------------------------------------------------------------------
-
-- (void)fitButton {
-    if(_button) {
-        _button.frame = self.contentView.frame;
-    }
 }
 
 @end

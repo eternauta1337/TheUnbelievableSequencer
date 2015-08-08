@@ -14,6 +14,7 @@
 
 @interface ViewController ()
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (strong, nonatomic) IBOutlet UIView *playheadView;
 @end
 
 @implementation ViewController {
@@ -32,6 +33,7 @@
     [self initTheAmazingAudioEngine];
     [self initTheAcceptableSequencer];
     [self initCollectionView];
+    [self initPlayhead];
 }
 
 - (void)initTheAmazingAudioEngine {
@@ -47,7 +49,7 @@
 - (void)initTheAcceptableSequencer {
     
     // The sequencer is just like any other TAAE channel.
-    _sequencer = [[AESequencerChannel alloc] initWithAudioController:_audioController andPatternResolution:0.5];
+    _sequencer = [[AESequencerChannel alloc] initWithAudioController:_audioController withPatternResolution:0.25 withNumTracks:5];
     [_audioController addChannels:@[_sequencer]];
     
     // Load a sequence.
@@ -62,9 +64,6 @@
     [_sequencer play];
 }
 
-#define NUM_KEYS 10
-#define NUM_PULSES 32
-
 - (void)initCollectionView {
  
     // Hook up.
@@ -72,7 +71,7 @@
     _collectionView.dataSource = self;
     
     // Custom layout.
-    SequencerLayout *layout = [[SequencerLayout alloc] initWithNumberOfKeys:NUM_KEYS numberOfPulses:NUM_PULSES collectionViewSize:_collectionView.frame.size];
+    SequencerLayout *layout = [[SequencerLayout alloc] initWithNumberOfKeys:_sequencer.numTracks numberOfPulses:_sequencer.numPulses collectionViewSize:_collectionView.frame.size];
     [_collectionView setCollectionViewLayout:layout];
     
     // Listen to notifications from cells.
@@ -122,12 +121,37 @@
 
 // # SECTIONS
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return NUM_KEYS;
+    return _sequencer.numTracks;
 }
 
 // # ITEMS PER SECTION
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return NUM_PULSES;
+    return _sequencer.numPulses;
+}
+
+// ---------------------------------------------------------------------------------------------------------
+#pragma mark - PLAYHEAD
+// ---------------------------------------------------------------------------------------------------------
+
+- (void)initPlayhead {
+    
+    // Query the sequencer position at a fixed time interval.
+    NSTimer *timer = [NSTimer timerWithTimeInterval:0.05
+                                             target:self
+                                           selector:@selector(onTimerTick:)
+                                           userInfo:nil repeats:YES];
+    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+}
+
+- (void)onTimerTick:(NSTimer*)timer {
+    [self updatePlayheadPosition];
+}
+
+- (void)updatePlayheadPosition {
+    
+    // Position playhead view.
+    float x = _sequencer.playbackPosition * _collectionView.contentSize.width - _collectionView.contentOffset.x;
+    _playheadView.frame = CGRectMake(x, 0, _playheadView.frame.size.width, _playheadView.frame.size.height);
 }
 
 @end

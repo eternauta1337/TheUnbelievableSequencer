@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 extern NSString *const SEQUENCER_CELL_NOTIFICATION_TOUCH_DOWN;
-extern NSString *const SEQUENCER_CELL_NOTIFICATION_TOUCH_UP;
 
 @interface SequencerCell : UICollectionViewCell
 

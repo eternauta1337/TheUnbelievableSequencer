@@ -85,10 +85,8 @@
 			children = (
 				217ECC721B6D1101001E31F8 /* ViewController.h */,
 				217ECC731B6D1101001E31F8 /* ViewController.m */,
-				210542B71B7590C500B19917 /* SequencerLayout.h */,
-				210542B81B7590C500B19917 /* SequencerLayout.m */,
-				210542BC1B7592A100B19917 /* SequencerCell.h */,
-				210542BD1B7592A100B19917 /* SequencerCell.m */,
+				210542BF1B76499400B19917 /* CollectionStuff */,
+				210542C01B764DB200B19917 /* Storyboards */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -100,6 +98,26 @@
 				217ECC921B6D131D001E31F8 /* AESequencerChannel.m */,
 			);
 			name = Sequencer;
+			sourceTree = "<group>";
+		};
+		210542BF1B76499400B19917 /* CollectionStuff */ = {
+			isa = PBXGroup;
+			children = (
+				210542B71B7590C500B19917 /* SequencerLayout.h */,
+				210542B81B7590C500B19917 /* SequencerLayout.m */,
+				210542BC1B7592A100B19917 /* SequencerCell.h */,
+				210542BD1B7592A100B19917 /* SequencerCell.m */,
+			);
+			name = CollectionStuff;
+			sourceTree = "<group>";
+		};
+		210542C01B764DB200B19917 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				217ECC751B6D1101001E31F8 /* Main.storyboard */,
+				217ECC7A1B6D1101001E31F8 /* LaunchScreen.xib */,
+			);
+			name = Storyboards;
 			sourceTree = "<group>";
 		};
 		217ECC5F1B6D1101001E31F8 = {
@@ -132,8 +150,6 @@
 				21A0AC0F1B7022D300CF7DB2 /* Sounds */,
 				21A0AC0D1B7021B100CF7DB2 /* Presets */,
 				21A0AC0B1B701AB800CF7DB2 /* Midis */,
-				217ECC751B6D1101001E31F8 /* Main.storyboard */,
-				217ECC7A1B6D1101001E31F8 /* LaunchScreen.xib */,
 				217ECC781B6D1101001E31F8 /* Images.xcassets */,
 				217ECC6B1B6D1101001E31F8 /* Supporting Files */,
 			);
