@@ -15,6 +15,7 @@
 @interface ViewController ()
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) IBOutlet UIView *playheadView;
+@property (strong, nonatomic) IBOutlet UIButton *playbackBtn;
 @end
 
 @implementation ViewController {
@@ -100,6 +101,21 @@
     
     // Affect pattern.
     [_sequencer toggleNoteOnAtIndexPath:indexPath on:cell.enabled];
+}
+
+// ---------------------------------------------------------------------------------------------------------
+#pragma mark - ACTIONS
+// ---------------------------------------------------------------------------------------------------------
+
+- (IBAction)onPlaybackBtnTapped:(id)sender {
+    if(_sequencer.isPlaying) {
+        [_sequencer stop];
+        [_playbackBtn setTitle:@"Play" forState:UIControlStateNormal];
+    }
+    else {
+        [_sequencer play];
+        [_playbackBtn setTitle:@"Stop" forState:UIControlStateNormal];
+    }
 }
 
 // -------------------------------------------------------------------------------------------

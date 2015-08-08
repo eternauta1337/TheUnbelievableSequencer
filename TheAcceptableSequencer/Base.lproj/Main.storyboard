@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="c6f-b1-UwP">
-                                <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                                <rect key="frame" x="0.0" y="0.0" width="568" height="260"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ASF-ca-jh2">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -37,9 +37,19 @@
                                 </cells>
                             </collectionView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aoP-lK-69c">
-                                <rect key="frame" x="0.0" y="0.0" width="1" height="320"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1" height="260"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2dn-wx-1nF">
+                                <rect key="frame" x="9" y="270" width="107" height="30"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Stop">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onPlaybackBtnTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dVb-qf-lGj"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -47,6 +57,7 @@
                     <size key="freeformSize" width="568" height="320"/>
                     <connections>
                         <outlet property="collectionView" destination="c6f-b1-UwP" id="lk0-Ye-kNa"/>
+                        <outlet property="playbackBtn" destination="2dn-wx-1nF" id="QSK-bm-jNP"/>
                         <outlet property="playheadView" destination="aoP-lK-69c" id="LdB-Xg-x6X"/>
                     </connections>
                 </viewController>

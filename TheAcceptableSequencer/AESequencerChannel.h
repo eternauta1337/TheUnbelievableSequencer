@@ -25,6 +25,7 @@
 - (void)play;
 - (void)stop;
 @property (readonly) float playbackPosition;
+@property (readonly) BOOL isPlaying;
 
 // Pattern.
 @property NSMutableDictionary *pattern;

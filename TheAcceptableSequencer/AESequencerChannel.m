@@ -14,7 +14,6 @@
     AEAudioController *_audioController;
     MusicPlayer _player;
     MusicSequence _sequence;
-    BOOL _isPlaying;
 }
 
 // ---------------------------------------------------------------------------------------------------------
