@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		210542B91B7590C500B19917 /* SequencerLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 210542B81B7590C500B19917 /* SequencerLayout.m */; };
+		210542BE1B7592A100B19917 /* SequencerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 210542BD1B7592A100B19917 /* SequencerCell.m */; };
 		217ECC6E1B6D1101001E31F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 217ECC6D1B6D1101001E31F8 /* main.m */; };
 		217ECC711B6D1101001E31F8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 217ECC701B6D1101001E31F8 /* AppDelegate.m */; };
 		217ECC741B6D1101001E31F8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 217ECC731B6D1101001E31F8 /* ViewController.m */; };
@@ -34,6 +36,10 @@
 /* Begin PBXFileReference section */
 		19B4CCB9D4FDAC7E4C57B73D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		1A7E6DC247F87F1365441CEA /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		210542B71B7590C500B19917 /* SequencerLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SequencerLayout.h; sourceTree = "<group>"; };
+		210542B81B7590C500B19917 /* SequencerLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SequencerLayout.m; sourceTree = "<group>"; };
+		210542BC1B7592A100B19917 /* SequencerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SequencerCell.h; sourceTree = "<group>"; };
+		210542BD1B7592A100B19917 /* SequencerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SequencerCell.m; sourceTree = "<group>"; };
 		217ECC681B6D1101001E31F8 /* TheAcceptableSequencer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheAcceptableSequencer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		217ECC6C1B6D1101001E31F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		217ECC6D1B6D1101001E31F8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -74,6 +80,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		210542BA1B75915300B19917 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				217ECC721B6D1101001E31F8 /* ViewController.h */,
+				217ECC731B6D1101001E31F8 /* ViewController.m */,
+				210542B71B7590C500B19917 /* SequencerLayout.h */,
+				210542B81B7590C500B19917 /* SequencerLayout.m */,
+				210542BC1B7592A100B19917 /* SequencerCell.h */,
+				210542BD1B7592A100B19917 /* SequencerCell.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		210542BB1B75915D00B19917 /* Sequencer */ = {
+			isa = PBXGroup;
+			children = (
+				217ECC911B6D131D001E31F8 /* AESequencerChannel.h */,
+				217ECC921B6D131D001E31F8 /* AESequencerChannel.m */,
+			);
+			name = Sequencer;
+			sourceTree = "<group>";
+		};
 		217ECC5F1B6D1101001E31F8 = {
 			isa = PBXGroup;
 			children = (
@@ -99,10 +127,8 @@
 			children = (
 				217ECC6F1B6D1101001E31F8 /* AppDelegate.h */,
 				217ECC701B6D1101001E31F8 /* AppDelegate.m */,
-				217ECC721B6D1101001E31F8 /* ViewController.h */,
-				217ECC731B6D1101001E31F8 /* ViewController.m */,
-				217ECC911B6D131D001E31F8 /* AESequencerChannel.h */,
-				217ECC921B6D131D001E31F8 /* AESequencerChannel.m */,
+				210542BA1B75915300B19917 /* View */,
+				210542BB1B75915D00B19917 /* Sequencer */,
 				21A0AC0F1B7022D300CF7DB2 /* Sounds */,
 				21A0AC0D1B7021B100CF7DB2 /* Presets */,
 				21A0AC0B1B701AB800CF7DB2 /* Midis */,
@@ -296,9 +322,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				217ECC741B6D1101001E31F8 /* ViewController.m in Sources */,
+				210542B91B7590C500B19917 /* SequencerLayout.m in Sources */,
 				217ECC931B6D131D001E31F8 /* AESequencerChannel.m in Sources */,
 				217ECC711B6D1101001E31F8 /* AppDelegate.m in Sources */,
 				217ECC6E1B6D1101001E31F8 /* main.m in Sources */,
+				210542BE1B7592A100B19917 /* SequencerCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

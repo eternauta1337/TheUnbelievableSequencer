@@ -7,6 +7,7 @@
 //
 
 #import "AESequencerChannel.h"
+#import <UIKit/UIKit.h>
 #import <AudioToolbox/AudioToolbox.h>
 
 @implementation AESequencerChannel {
@@ -14,18 +15,18 @@
     MusicPlayer _player;
     MusicSequence _sequence;
     BOOL _isPlaying;
+    float _resolution;
 }
 
 // ---------------------------------------------------------------------------------------------------------
 #pragma mark - INIT
 // ---------------------------------------------------------------------------------------------------------
 
-- (instancetype)initWithAudioController:(AEAudioController*)audioController {
+- (instancetype)initWithAudioController:(AEAudioController*)audioController andPatternResolution:(float)resolution {
     
     _audioController = audioController;
-    
-    // Defaults.
     _isPlaying = NO;
+    _resolution = resolution;
     
     // Init as an AUSampler audio unit channel.
     AudioComponentDescription component = AEAudioComponentDescriptionMake(kAudioUnitManufacturer_Apple, kAudioUnitType_MusicDevice, kAudioUnitSubType_Sampler);
@@ -36,6 +37,9 @@
     
     // Create a MusicPlayer to control playback.
     NewMusicPlayer(&_player);
+    
+    // Init data.
+    _pattern = [NSMutableDictionary dictionary];
     
     return self;
 }
@@ -65,6 +69,121 @@
     MusicPlayerSetSequence(_player, _sequence);
     MusicPlayerPreroll(_player);
     [self toggleLooping:YES onSequence:sequence];
+    
+    // Build pattern.
+    [self musicSequenceToPattern];
+}
+
+// ---------------------------------------------------------------------------------------------------------
+#pragma mark - PATTERN
+// ---------------------------------------------------------------------------------------------------------
+
+- (void)toggleNoteOnAtIndexPath:(NSIndexPath*)indexPath on:(BOOL)on {
+    
+    // Update data grid.
+    _pattern[indexPath] = on ? @1 : @0;
+    
+    // Update sequence.
+    [self dataToMusicTrack];
+}
+
+- (void)dataToMusicTrack {
+    
+    // Get track 1. (0 is tempo).
+    int trackIndex = 1;
+    MusicTrack track;
+    CheckError(MusicSequenceGetIndTrack(_sequence, trackIndex, &track), "Error getting track.");
+    
+    // Clear MusicTrack.
+    MusicTimeStamp startTime = 0;
+    MusicTimeStamp endTime = _patternLengthInBeats;
+    CheckError(MusicTrackClear(track, startTime, endTime), "Error clearing music track.");
+    
+    // Sweep cells.
+    MusicTimeStamp time = 0;
+    MusicTimeStamp duration = 1.0;
+    int sectionCount = 10;
+    int rowCount = _patternLengthInBeats / _resolution;
+    for(int rowIndex = startTime; rowIndex < rowCount; rowIndex++) {
+        for(int sectionIndex = 0; sectionIndex < sectionCount; sectionIndex++) {
+            
+            // Id index path.
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:rowIndex inSection:sectionIndex];
+            
+            // ON?
+            if(_pattern[indexPath] && [_pattern[indexPath] isEqualToNumber:@1]) {
+                MIDINoteMessage note;
+                note.note = 36 + sectionIndex;
+                note.channel = 1;
+                note.velocity = 100.00;
+                note.duration = 1.0;
+                time = rowIndex * _resolution - duration;
+                CheckError(MusicTrackNewMIDINoteEvent(track, time, &note), "Error adding note.");
+            }
+        }
+    }
+}
+
+- (void)musicSequenceToPattern {
+    
+    NSLog(@"musicSequenceToPattern()");
+    
+    // Get track 1. (0 is tempo).
+    int trackIndex = 1;
+    MusicTrack track;
+    CheckError(MusicSequenceGetIndTrack(_sequence, trackIndex, &track), "Error getting track.");
+    
+    // Get track info.
+    MusicTimeStamp trackLength = 0;
+    UInt32 trackLenLength_size = sizeof(trackLength);
+    CheckError(MusicTrackGetProperty(track, kSequenceTrackProperty_TrackLength, &trackLength, &trackLenLength_size), "Error getting track info");
+    _patternLengthInBeats = trackLength;
+    
+    // Sweep events and convert notes to the grid.
+    MusicEventIterator iterator = NULL;
+    NewMusicEventIterator(track, &iterator);
+    MusicTimeStamp timestamp = 0; // all extracted time values are in beats (black notes)
+    MusicEventType eventType = 0;
+    const void *eventData = NULL;
+    UInt32 eventDataSize;
+    Boolean hasNext = YES;
+    int j = 0;
+    while(hasNext) {
+        
+        // Next iteration.
+        MusicEventIteratorHasNextEvent(iterator, &hasNext);
+        if(j > 5000) { hasNext = false; } // bail out
+        
+        // Get event info.
+        MusicEventIteratorGetEventInfo(iterator, &timestamp, &eventType, &eventData, &eventDataSize);
+        
+        // NOTE EVENT
+        if(eventType == kMusicEventType_MIDINoteMessage) {
+            
+            // Cast message.
+            MIDINoteMessage *message = (MIDINoteMessage*)eventData;
+            
+            // Log note.         
+            UInt8 note = message->note;
+            NSLog(@"note: %d", note);
+            int noteSection = note - 36;
+            int noteRow = timestamp * (1/_resolution);
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:noteRow inSection:noteSection];
+            _pattern[indexPath] = [NSNumber numberWithBool:YES];
+        }
+        
+        // Iterate.
+        MusicEventIteratorNextEvent(iterator);
+        j++;
+    }
+}
+
+- (BOOL)isNoteOnAtIndexPath:(NSIndexPath*)indexPath {
+    BOOL isOn = NO;
+    if(_pattern[indexPath] && [_pattern[indexPath] isEqualToNumber:@1]) {
+        isOn = YES;
+    }
+    return isOn;
 }
 
 // ---------------------------------------------------------------------------------------------------------

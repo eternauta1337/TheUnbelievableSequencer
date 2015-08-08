@@ -12,7 +12,7 @@
 
 @interface AESequencerChannel : AEAudioUnitChannel
 
-- (instancetype)initWithAudioController:(AEAudioController*)audioController;
+- (instancetype)initWithAudioController:(AEAudioController*)audioController andPatternResolution:(float)resolution;
 
 // Load sequences.
 - (void)loadSequence:(MusicSequence)sequence;
@@ -25,5 +25,11 @@
 // Playback.
 - (void)play;
 - (void)stop;
+
+// Pattern.
+@property NSMutableDictionary *pattern;
+@property int patternLengthInBeats;
+- (BOOL)isNoteOnAtIndexPath:(NSIndexPath*)indexPath;
+- (void)toggleNoteOnAtIndexPath:(NSIndexPath*)indexPath on:(BOOL)on;
 
 @end
