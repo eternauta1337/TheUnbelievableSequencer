@@ -240,7 +240,7 @@
 								<key>stage</key>
 								<integer>5</integer>
 								<key>time</key>
-								<real>0.0</real>
+								<real>60</real>
 							</dict>
 							<dict>
 								<key>curve</key>
@@ -290,25 +290,11 @@
 				<array>
 					<dict>
 						<key>ID</key>
-						<integer>5</integer>
-						<key>enabled</key>
-						<true/>
-						<key>loop enabled</key>
-						<false/>
-						<key>max key</key>
-						<integer>40</integer>
-						<key>min key</key>
-						<integer>40</integer>
-						<key>root key</key>
-						<integer>40</integer>
-						<key>waveform</key>
-						<integer>268435461</integer>
-					</dict>
-					<dict>
-						<key>ID</key>
 						<integer>1</integer>
 						<key>enabled</key>
 						<true/>
+						<key>gain</key>
+						<real>12</real>
 						<key>loop enabled</key>
 						<false/>
 						<key>max key</key>
@@ -325,6 +311,8 @@
 						<integer>2</integer>
 						<key>enabled</key>
 						<true/>
+						<key>gain</key>
+						<real>2.7000000476837158</real>
 						<key>loop enabled</key>
 						<false/>
 						<key>max key</key>
@@ -357,6 +345,8 @@
 						<integer>4</integer>
 						<key>enabled</key>
 						<true/>
+						<key>gain</key>
+						<real>-19.980001449584961</real>
 						<key>loop enabled</key>
 						<false/>
 						<key>max key</key>
@@ -367,6 +357,22 @@
 						<integer>39</integer>
 						<key>waveform</key>
 						<integer>268435460</integer>
+					</dict>
+					<dict>
+						<key>ID</key>
+						<integer>5</integer>
+						<key>enabled</key>
+						<true/>
+						<key>loop enabled</key>
+						<false/>
+						<key>max key</key>
+						<integer>40</integer>
+						<key>min key</key>
+						<integer>40</integer>
+						<key>root key</key>
+						<integer>40</integer>
+						<key>waveform</key>
+						<integer>268435461</integer>
 					</dict>
 				</array>
 			</dict>
@@ -397,8 +403,8 @@
 	<dict>
 		<key>Sample:268435457</key>
 		<data>
-		Ym9vaygCAAAAAAQQMAAAAAnUec5nuBz3Z6BI/mBdHPnfvBj3jdUQkK6g/mVn
-		9MlVSAEAAAQAAAADAwAAAAgAKAYAAAABAQAAU291bmRzAAAMAAAAAQEAAEtp
+		Ym9vaygCAAAAAAQQMAAAALQs4nzfOipvHe2K7ZO6TWHaMHjZyZO1VaPse0JU
+		EDg6SAEAAAQAAAADAwAAAAgAKAYAAAABAQAAU291bmRzAAAMAAAAAQEAAEtp
 		Y2stNjA2LmFpZggAAAABBgAAEAAAACAAAAAIAAAABAMAAIRZPAAAAAAACAAA
 		AAQDAACJWTwAAAAAAAgAAAABBgAARAAAAFQAAAAIAAAAAAQAAEG4WhU0AAAA
 		GAAAAAECAAABAAAAAAAAAA8AAAAAAAAAAAAAAAAAAAAIAAAAAQkAAGZpbGU6
@@ -413,8 +419,8 @@
 		</data>
 		<key>Sample:268435458</key>
 		<data>
-		Ym9vaywCAAAAAAQQMAAAAGuTefDmBzsPeii7dEXzmABiPWeZ7sRYdCyQgvVi
-		9TzCTAEAAAQAAAADAwAAAAgAKAYAAAABAQAAU291bmRzAAANAAAAAQEAAFNu
+		Ym9vaywCAAAAAAQQMAAAAJ6wy/d3JuVdauBsSmEUhYbzbeKqV7IaVq3teQ33
+		IJajTAEAAAQAAAADAwAAAAgAKAYAAAABAQAAU291bmRzAAANAAAAAQEAAFNu
 		YXJlLTYwNi5haWYAAAAIAAAAAQYAABAAAAAgAAAACAAAAAQDAACEWTwAAAAA
 		AAgAAAAEAwAAi1k8AAAAAAAIAAAAAQYAAEgAAABYAAAACAAAAAAEAABBuFoV
 		RgAAABgAAAABAgAAAQAAAAAAAAAPAAAAAAAAAAAAAAAAAAAACAAAAAEJAABm
@@ -429,8 +435,8 @@
 		</data>
 		<key>Sample:268435459</key>
 		<data>
-		Ym9vazACAAAAAAQQMAAAAFIwhnPp9iwM561DhUX08STGHmDnamxDXUUuo1/g
-		aEkuUAEAAAQAAAADAwAAAAgAKAYAAAABAQAAU291bmRzAAAUAAAAAQEAAEhp
+		Ym9vazACAAAAAAQQMAAAAFLVZl3Z9yUDNgFuawaSxHmY1s4CqK6NC9UILfdH
+		y+2TUAEAAAQAAAADAwAAAAgAKAYAAAABAQAAU291bmRzAAAUAAAAAQEAAEhp
 		aGF0LTYwNi1DbG9zZWQuYWlmCAAAAAEGAAAQAAAAIAAAAAgAAAAEAwAAhFk8
 		AAAAAAAIAAAABAMAAIhZPAAAAAAACAAAAAEGAABMAAAAXAAAAAgAAAAABAAA
 		QbhaFRIAAAAYAAAAAQIAAAEAAAAAAAAADwAAAAAAAAAAAAAAAAAAAAgAAAAB
@@ -445,8 +451,8 @@
 		</data>
 		<key>Sample:268435460</key>
 		<data>
-		Ym9vaygCAAAAAAQQMAAAAEttkL6t4PdKE3k/BVLTGn5KfuE1OUHOTBcvziaR
-		qT8ZSAEAAAQAAAADAwAAAAgAKAYAAAABAQAAU291bmRzAAAMAAAAAQEAAFJp
+		Ym9vaygCAAAAAAQQMAAAABCk7SdY9p8dJhxh4R5Z837SKfR2snxCZyq2VIGL
+		XOCWSAEAAAQAAAADAwAAAAgAKAYAAAABAQAAU291bmRzAAAMAAAAAQEAAFJp
 		ZGUtNzA3LmFpZggAAAABBgAAEAAAACAAAAAIAAAABAMAAIRZPAAAAAAACAAA
 		AAQDAACKWTwAAAAAAAgAAAABBgAARAAAAFQAAAAIAAAAAAQAAEG4WhUyAAAA
 		GAAAAAECAAABAAAAAAAAAA8AAAAAAAAAAAAAAAAAAAAIAAAAAQkAAGZpbGU6
@@ -461,8 +467,8 @@
 		</data>
 		<key>Sample:268435461</key>
 		<data>
-		Ym9vaywCAAAAAAQQMAAAAJ6Ss6KWr8loQcJ2BqhvOH6y0xoWZm2Gi9Ju5LIj
-		3r0nTAEAAAQAAAADAwAAAAgAKAYAAAABAQAAU291bmRzAAANAAAAAQEAAENy
+		Ym9vaywCAAAAAAQQMAAAAIa9apQCnhdc10YaHuSf0waEYaHStfK7INRZ38Hx
+		ZktoTAEAAAQAAAADAwAAAAgAKAYAAAABAQAAU291bmRzAAANAAAAAQEAAENy
 		YXNoLTkwOS5haWYAAAAIAAAAAQYAABAAAAAgAAAACAAAAAQDAACEWTwAAAAA
 		AAgAAAAEAwAAh1k8AAAAAAAIAAAAAQYAAEgAAABYAAAACAAAAAAEAABBuFoV
 		GAAAABgAAAABAgAAAQAAAAAAAAAPAAAAAAAAAAAAAAAAAAAACAAAAAEJAABm

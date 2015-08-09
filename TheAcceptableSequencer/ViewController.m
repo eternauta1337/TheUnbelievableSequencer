@@ -14,13 +14,16 @@
 
 @interface ViewController ()
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
-@property (strong, nonatomic) IBOutlet UIView *playheadView;
 @property (strong, nonatomic) IBOutlet UIButton *playbackBtn;
+@property (strong, nonatomic) IBOutlet UILabel *tempoLabel;
+@property (strong, nonatomic) IBOutlet UISlider *tempoSlider;
 @end
 
 @implementation ViewController {
     AEAudioController *_audioController;
     AESequencerChannel *_sequencer;
+    NSTimer *_timer;
+    UIView *_playheadView;
 }
 
 // ---------------------------------------------------------------------------------------------------------
@@ -60,9 +63,6 @@
     // Load a sound bank.
     NSURL *presetURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Presets/SimpleDrums" ofType:@"aupreset"]];
     [_sequencer loadPreset:presetURL];
-    
-    // Start the sequencer.
-    [_sequencer play];
 }
 
 - (void)initCollectionView {
@@ -79,9 +79,14 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(onCellTouchDown:)
                                                  name:SEQUENCER_CELL_NOTIFICATION_TOUCH_DOWN object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(onCellTouchUp:)
-//                                                 name:SEQUENCER_CELL_NOTIFICATION_TOUCH_UP object:nil];
+}
+
+- (void)initPlayhead {
+    
+    // Playhead is a simple view inside the collection.
+    _playheadView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, _collectionView.frame.size.height)];
+    _playheadView.backgroundColor = [UIColor cyanColor];
+    [_collectionView addSubview:_playheadView];
 }
 
 // -------------------------------------------------------------------------------------------
@@ -110,12 +115,19 @@
 - (IBAction)onPlaybackBtnTapped:(id)sender {
     if(_sequencer.isPlaying) {
         [_sequencer stop];
+        [self stopTimer];
         [_playbackBtn setTitle:@"Play" forState:UIControlStateNormal];
     }
     else {
         [_sequencer play];
+        [self startTimer];
         [_playbackBtn setTitle:@"Stop" forState:UIControlStateNormal];
     }
+}
+
+- (IBAction)onTempoSldrChanged:(id)sender {
+    _sequencer.playrate = _tempoSlider.value;
+    _tempoLabel.text = [NSString stringWithFormat:@"%dbpm", (int)roundf(_sequencer.bpm)];
 }
 
 // -------------------------------------------------------------------------------------------
@@ -149,14 +161,21 @@
 #pragma mark - PLAYHEAD
 // ---------------------------------------------------------------------------------------------------------
 
-- (void)initPlayhead {
+- (void)startTimer {
     
     // Query the sequencer position at a fixed time interval.
-    NSTimer *timer = [NSTimer timerWithTimeInterval:0.05
+    _timer = [NSTimer timerWithTimeInterval:0.05
                                              target:self
                                            selector:@selector(onTimerTick:)
                                            userInfo:nil repeats:YES];
-    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+    [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+}
+
+- (void)stopTimer {
+    if(_timer) {
+        [_timer invalidate];
+        _timer = nil;
+    }
 }
 
 - (void)onTimerTick:(NSTimer*)timer {
@@ -166,7 +185,7 @@
 - (void)updatePlayheadPosition {
     
     // Position playhead view.
-    float x = _sequencer.playbackPosition * _collectionView.contentSize.width - _collectionView.contentOffset.x;
+    float x = _sequencer.playbackPosition * _collectionView.contentSize.width;
     _playheadView.frame = CGRectMake(x, 0, _playheadView.frame.size.width, _playheadView.frame.size.height);
 }
 

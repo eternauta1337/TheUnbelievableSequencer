@@ -14,6 +14,7 @@
     AEAudioController *_audioController;
     MusicPlayer _player;
     MusicSequence _sequence;
+    float _sequenceBpm;
 }
 
 // ---------------------------------------------------------------------------------------------------------
@@ -26,6 +27,7 @@
     _isPlaying = NO;
     _resolution = resolution;
     _numTracks = numTracks;
+    _playrate = 1;
     
     // Init as an AUSampler audio unit channel.
     AudioComponentDescription component = AEAudioComponentDescriptionMake(kAudioUnitManufacturer_Apple, kAudioUnitType_MusicDevice, kAudioUnitSubType_Sampler);
@@ -69,55 +71,98 @@
     MusicPlayerPreroll(_player);
     [self toggleLooping:YES onSequence:sequence];
     
+    // Extract info from the sequence.
+    [self getSequenceInfo];
+    
     // Build pattern.
     [self musicSequenceToPattern];
 }
 
+- (void)getSequenceInfo {
+    
+    MusicTrack track;
+    
+    // Get number of tracks.
+    UInt32 numberOfTracks;
+    CheckError(MusicSequenceGetTrackCount(_sequence, &numberOfTracks), "Error getting number of tracks.");
+    NSLog(@"  numberOfTracks: %d", (unsigned int)numberOfTracks);
+    
+    // Get tempo info.
+    CheckError(MusicSequenceGetTempoTrack(_sequence, &track), "Error getting tempo track");
+    SInt16 ppqn;
+    UInt32 length; // number of events in tempo track
+    CheckError(MusicTrackGetProperty(track, kSequenceTrackProperty_TimeResolution, &ppqn, &length), "Error getting time resolution.");
+    NSLog(@"  ppqn: %d", ppqn);
+    NSLog(@"  length: %d", (unsigned int)length);
+    
+    // Sweep tempo track events.
+    MusicEventIterator iterator = NULL;
+    NewMusicEventIterator(track, &iterator);
+    MusicTimeStamp timestamp = 0; // all extracted time values are in beats (black notes)
+    MusicEventType eventType = 0;
+    const void *eventData = NULL;
+    UInt32 eventDataSize;
+    Boolean hasNext = YES;
+    int j = 0;
+    while(hasNext) {
+        
+        //        NSLog(@"    event: %d", j);
+        
+        // Next iteration.
+        MusicEventIteratorHasNextEvent(iterator, &hasNext);
+        if(j > 1000) { hasNext = false; } // bail out
+        
+        // Get event info.
+        MusicEventIteratorGetEventInfo(iterator, &timestamp, &eventType, &eventData, &eventDataSize);
+//        NSLog(@"    timestamp: %f (beats)", timestamp);
+//        NSLog(@"    eventType: %d", (unsigned int)eventType);
+        //            NSLog(@"    eventDataSize: %d", (unsigned int)eventDataSize);
+        //            NSLog(@"    eventData: %d", eventData);
+        
+        // TEMPO EVENT
+        if(eventType == kMusicEventType_ExtendedTempo) {
+//            NSLog(@"    TempoEvent");
+            
+            ExtendedTempoEvent * tempoEvent = (ExtendedTempoEvent*)eventData;
+            _sequenceBpm = _bpm = tempoEvent->bpm;
+        }
+        
+        // Iterate.
+        MusicEventIteratorNextEvent(iterator);
+        j++;
+    }
+    NSLog(@"  bpm: %f", _bpm);
+}
+
 // ---------------------------------------------------------------------------------------------------------
-#pragma mark - PATTERN
+#pragma mark - PATTERN / MIDI SEQUENCE
 // ---------------------------------------------------------------------------------------------------------
 
 - (void)toggleNoteOnAtIndexPath:(NSIndexPath*)indexPath on:(BOOL)on {
     
-    // Update data grid.
+    // Update pattern.
     _pattern[indexPath] = on ? @1 : @0;
-    
-    // Update sequence.
-    [self dataToMusicTrack];
-}
-
-- (void)dataToMusicTrack {
     
     // Get track 1. (0 is tempo).
     int trackIndex = 1;
     MusicTrack track;
     CheckError(MusicSequenceGetIndTrack(_sequence, trackIndex, &track), "Error getting track.");
     
-    // Clear MusicTrack.
-    MusicTimeStamp startTime = 0;
-    MusicTimeStamp endTime = _patternLengthInBeats;
+    // Clear MusicTrack at location.
+    MusicTimeStamp startTime = indexPath.row * _resolution;
+    MusicTimeStamp endTime = startTime + _resolution;
     CheckError(MusicTrackClear(track, startTime, endTime), "Error clearing music track.");
     
-    // Sweep cells.
-    MusicTimeStamp time = 0;
-    MusicTimeStamp duration = 1.0;
-    int rowCount = _patternLengthInBeats / _resolution;
-    for(int rowIndex = startTime; rowIndex < rowCount; rowIndex++) {
-        for(int sectionIndex = 0; sectionIndex < _numTracks; sectionIndex++) {
-            
-            // Id index path.
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:rowIndex inSection:sectionIndex];
-            
-            // ON?
-            if(_pattern[indexPath] && [_pattern[indexPath] isEqualToNumber:@1]) {
-                MIDINoteMessage note;
-                note.note = 36 + sectionIndex;
-                note.channel = 1;
-                note.velocity = 100.00;
-                note.duration = 1.0;
-                time = rowIndex * _resolution - duration;
-                CheckError(MusicTrackNewMIDINoteEvent(track, time, &note), "Error adding note.");
-            }
+    // Review section.
+    for(int i = 0; i < _numTracks; i++) {
+        NSIndexPath *path = [NSIndexPath indexPathForRow:indexPath.row inSection:i];
+        if(_pattern[path] && [_pattern[path] isEqualToNumber:@1]) {
+            MIDINoteMessage note;
+            note.note = 36 + i;
+            note.channel = 1;
+            note.velocity = 100.00;
+            note.duration = _resolution;
+            CheckError(MusicTrackNewMIDINoteEvent(track, startTime, &note), "Error adding note.");
         }
     }
 }
@@ -186,7 +231,7 @@
 }
 
 // ---------------------------------------------------------------------------------------------------------
-#pragma mark - LOAD PRESETS
+#pragma mark - SOUNDS
 // ---------------------------------------------------------------------------------------------------------
 
 - (void)loadPreset:(NSURL*)fileURL {
@@ -203,6 +248,10 @@
                                     0,
                                     &auPreset,
                                     sizeof(auPreset)), "Error loading preset.");
+}
+
+- (void)setVolume:(float)volume onTrack:(int)trackIndex {
+    
 }
 
 // ---------------------------------------------------------------------------------------------------------
@@ -232,6 +281,19 @@
     loopPos = loopPos - floorf(loopPos);
     
     return loopPos;
+}
+
+- (void)setPlayrate:(float)playrate {
+    if(playrate == _playrate) return;
+    _playrate = playrate;
+    MusicPlayerSetPlayRateScalar(_player, (Float64)_playrate);
+    _bpm = _playrate * _sequenceBpm;
+}
+
+- (void)setBpm:(float)bpm {
+    float ratio = bpm / _bpm;
+    [self setPlayrate:ratio];
+    _bpm = bpm;
 }
 
 // ---------------------------------------------------------------------------------------------------------

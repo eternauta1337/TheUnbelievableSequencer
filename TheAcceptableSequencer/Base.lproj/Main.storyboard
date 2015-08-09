@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="c6f-b1-UwP">
-                                <rect key="frame" x="0.0" y="0.0" width="568" height="260"/>
+                                <rect key="frame" x="0.0" y="0.0" width="568" height="274"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ASF-ca-jh2">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -36,20 +36,28 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aoP-lK-69c">
-                                <rect key="frame" x="0.0" y="0.0" width="1" height="260"/>
-                                <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2dn-wx-1nF">
-                                <rect key="frame" x="9" y="270" width="107" height="30"/>
+                                <rect key="frame" x="16" y="282" width="107" height="30"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Stop">
+                                <state key="normal" title="Play">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="onPlaybackBtnTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dVb-qf-lGj"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="120bpm" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ut-A5-7ld">
+                                <rect key="frame" x="471" y="286" width="81" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="2" translatesAutoresizingMaskIntoConstraints="NO" id="nei-55-1hn">
+                                <rect key="frame" x="291" y="282" width="174" height="31"/>
+                                <connections>
+                                    <action selector="onTempoSldrChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="rSb-qW-oDh"/>
+                                </connections>
+                            </slider>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -58,7 +66,8 @@
                     <connections>
                         <outlet property="collectionView" destination="c6f-b1-UwP" id="lk0-Ye-kNa"/>
                         <outlet property="playbackBtn" destination="2dn-wx-1nF" id="QSK-bm-jNP"/>
-                        <outlet property="playheadView" destination="aoP-lK-69c" id="LdB-Xg-x6X"/>
+                        <outlet property="tempoLabel" destination="7ut-A5-7ld" id="bA1-0h-aoE"/>
+                        <outlet property="tempoSlider" destination="nei-55-1hn" id="ne6-ZG-on9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
