@@ -4,25 +4,20 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-TheAmazingAudioEngine.xcscheme</key>
+		<key>TheUnbelievableSequencer.xcscheme</key>
 		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
+			<key>orderHint</key>
+			<integer>0</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>49D4426416E61920044C9574</key>
+		<key>21C4958A1B7813F70030048A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B6B9FE1EE1DF05A080F26B09</key>
+		<key>21C495A31B7813F70030048A</key>
 		<dict>
 			<key>primary</key>
 			<true/>

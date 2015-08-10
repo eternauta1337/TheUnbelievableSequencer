@@ -10,5 +10,5 @@
 #define COCOAPODS_POD_AVAILABLE_TheAmazingAudioEngine
 #define COCOAPODS_VERSION_MAJOR_TheAmazingAudioEngine 1
 #define COCOAPODS_VERSION_MINOR_TheAmazingAudioEngine 4
-#define COCOAPODS_VERSION_PATCH_TheAmazingAudioEngine 7
+#define COCOAPODS_VERSION_PATCH_TheAmazingAudioEngine 8
 

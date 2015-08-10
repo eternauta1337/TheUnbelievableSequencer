@@ -153,6 +153,28 @@ typedef OSStatus (*AEAudioControllerRenderCallback) (__unsafe_unretained id    c
 @optional
 
 /*!
+ * Perform setup, to prepare for playback
+ *
+ *  Playable objects may implement this method to be notified when the object is
+ *  being added to the audio controller, or when the audio system is being restored
+ *  after a system error.
+ *
+ *  Use this method to allocate/initialise any required resources.
+ */
+- (void)setupWithAudioController:(AEAudioController *)audioController;
+
+/*!
+ * Clean up resources
+ *
+ *  Playable objects may implement this method to be notified when the object is
+ *  being removed from the audio controller, or when the audio system is being
+ *  cleaned up after a system error.
+ *
+ *  Use this method to free up any resources used.
+ */
+- (void)teardown;
+
+/*!
  * Track volume
  *
  *  Changes are tracked by Key-Value Observing, so be sure to send KVO notifications
@@ -336,6 +358,30 @@ typedef OSStatus (*AEAudioControllerFilterCallback)(__unsafe_unretained id    fi
  * @return Pointer to a variable speed filter callback
  */
 @property (nonatomic, readonly) AEAudioControllerFilterCallback filterCallback;
+    
+@optional
+    
+/*!
+ * Perform setup, to prepare for playback
+ *
+ *  Filter objects may implement this method to be notified when the object is
+ *  being added to the audio controller, or when the audio system is being restored
+ *  after a system error.
+ *
+ *  Use this method to allocate/initialise any required resources.
+ */
+- (void)setupWithAudioController:(AEAudioController *)audioController;
+
+/*!
+ * Clean up resources
+ *
+ *  Filter objects may implement this method to be notified when the object is
+ *  being removed from the audio controller, or when the audio system is being
+ *  cleaned up after a system error.
+ *
+ *  Use this method to free up any resources used.
+ */
+- (void)teardown;
 
 @end
 
@@ -424,7 +470,7 @@ typedef struct _channel_group_t* AEChannelGroupRef;
  * @param userInfo          Pointer to your data
  * @param userInfoLength    Length of userInfo in bytes
  */
-typedef void (*AEAudioControllerMainThreadMessageHandler)(AEAudioController *audioController, void *userInfo, int userInfoLength);
+typedef void (*AEAudioControllerMainThreadMessageHandler)(__unsafe_unretained AEAudioController *audioController, void *userInfo, int userInfoLength);
 
 #pragma mark -
 
@@ -671,7 +717,29 @@ typedef void (*AEAudioControllerMainThreadMessageHandler)(AEAudioController *aud
 - (float)panForChannelGroup:(AEChannelGroupRef)group;
 
 /*!
+ * Set the playing status of a channel group
+ *
+ *  If this is NO, then the group will be silenced and no further render callbacks
+ *  will be performed on child channels until set to YES again.
+ *
+ * @param playing   Whether group is playing
+ * @param group     Group identifier
+ */
+- (void)setPlaying:(BOOL)playing forChannelGroup:(AEChannelGroupRef)group;
+
+/*!
+ * Get the playing status of a channel group
+ *
+ * @param group     Group identifier
+ * @return Whether group is playing
+ */
+- (BOOL)channelGroupIsPlaying:(AEChannelGroupRef)group;
+
+/*!
  * Set the mute status of a channel group
+ *
+ *  If YES, group will be silenced, but render callbacks of child channels
+ *  will continue to be performed.
  *
  * @param muted     Whether group is muted
  * @param group     Group identifier
@@ -1033,7 +1101,7 @@ typedef void (*AEAudioControllerMainThreadMessageHandler)(AEAudioController *aud
  * @param userInfo        Pointer to user info data to pass to handler - this will be copied.
  * @param userInfoLength  Length of userInfo in bytes.
  */
-void AEAudioControllerSendAsynchronousMessageToMainThread(AEAudioController                 *audioController, 
+void AEAudioControllerSendAsynchronousMessageToMainThread(__unsafe_unretained AEAudioController *audioController,
                                                           AEAudioControllerMainThreadMessageHandler    handler, 
                                                           void                              *userInfo,
                                                           int                                userInfoLength);
@@ -1106,22 +1174,22 @@ void AEAudioControllerSendAsynchronousMessageToMainThread(AEAudioController     
 /*!
  * Get access to the configured AudioStreamBasicDescription
  */
-AudioStreamBasicDescription *AEAudioControllerAudioDescription(AEAudioController *audioController);
+AudioStreamBasicDescription *AEAudioControllerAudioDescription(__unsafe_unretained AEAudioController *audioController);
 
 /*!
  * Get access to the input AudioStreamBasicDescription
  */
-AudioStreamBasicDescription *AEAudioControllerInputAudioDescription(AEAudioController *audioController);
+AudioStreamBasicDescription *AEAudioControllerInputAudioDescription(__unsafe_unretained AEAudioController *audioController);
 
 /*!
  * Convert a time span in seconds into a number of frames at the current sample rate
  */
-long AEConvertSecondsToFrames(AEAudioController *audioController, NSTimeInterval seconds);
+long AEConvertSecondsToFrames(__unsafe_unretained AEAudioController *audioController, NSTimeInterval seconds);
 
 /*!
  * Convert a number of frames into a time span in seconds
  */
-NSTimeInterval AEConvertFramesToSeconds(AEAudioController *audioController, long frames);
+NSTimeInterval AEConvertFramesToSeconds(__unsafe_unretained AEAudioController *audioController, long frames);
 
 ///@}
 #pragma mark - Properties
@@ -1151,22 +1219,24 @@ NSTimeInterval AEConvertFramesToSeconds(AEAudioController *audioController, long
 /*!
  * Whether to use the "Measurement" Audio Session Mode for improved audio quality and bass response.
  *
- *  Note also the @link avoidMeasurementModeForBuiltInMic @endlink property.
+ *  Note that when the device's built-in mic is being used, TAAE can automatically boost the gain, as this
+ *  is very low while Measurement Mode is enabled. See @link boostBuiltInMicGainInMeasurementMode @endlink.
  *
  * Default: NO
  */
 @property (nonatomic, assign) BOOL useMeasurementMode;
 
 /*!
- * Whether to avoid using Measurement Mode with the built-in mic
+ * Whether to boost the input volume while using Measurement Mode with the built-in mic
  *
- *  When used with the built-in microphone, Measurement Mode results in quite low audio
- *  input levels. Setting this property to YES causes TAAE to avoid using Measurement Mode
- *  with the built-in mic, avoiding this problem.
+ *  When the device's built-in mic is being used while Measurement Mode is enabled (see
+ *  @link useMeasurementMode @endlink), TAAE can automatically boost the gain, as this
+ *  is very low with Measurement Mode. This takes place independently of the @link
+ *  inputGain @endlink setting.
  *
  *  Default is YES.
  */
-@property (nonatomic, assign) BOOL avoidMeasurementModeForBuiltInMic;
+@property (nonatomic, assign) BOOL boostBuiltInMicGainInMeasurementMode;
 
 /*! 
  * Mute output
@@ -1379,7 +1449,7 @@ NSTimeInterval AEConvertFramesToSeconds(AEAudioController *audioController, long
  */
 @property (nonatomic, readonly) AUGraph audioGraph;
 
-#pragma mark - C access to properties
+#pragma mark - Timing
 
 /*!
  * Input latency (in seconds)
@@ -1395,7 +1465,7 @@ NSTimeInterval AEConvertFramesToSeconds(AEAudioController *audioController, long
  * @param controller The audio controller
  * @returns The currently-reported hardware input latency
  */
-NSTimeInterval AEAudioControllerInputLatency(AEAudioController *controller);
+NSTimeInterval AEAudioControllerInputLatency(__unsafe_unretained AEAudioController *controller);
 
 /*!
  * Output latency (in seconds)
@@ -1411,7 +1481,18 @@ NSTimeInterval AEAudioControllerInputLatency(AEAudioController *controller);
  * @param controller The audio controller
  * @returns The currently-reported hardware output latency
  */
-NSTimeInterval AEAudioControllerOutputLatency(AEAudioController *controller);
+NSTimeInterval AEAudioControllerOutputLatency(__unsafe_unretained AEAudioController *controller);
+
+/*!
+ * Get the current audio system timestamp
+ *
+ *  For use on the audio thread; returns the latest audio timestamp, either for the input or the
+ *  output bus, depending on when this method is called.
+ *
+ * @param controller The audio controller
+ * @returns The last-seen audio timestamp for the most recently rendered bus
+ */
+AudioTimeStamp AEAudioControllerCurrentAudioTimestamp(__unsafe_unretained AEAudioController *controller);
 
 @end
 
