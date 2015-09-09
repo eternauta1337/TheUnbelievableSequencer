@@ -67,7 +67,6 @@
 - (void)initCollectionView {
     
     // Hook up.
-    _collectionView.delegate = self;
     _collectionView.dataSource = self;
     
     // Custom layout.
