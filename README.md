@@ -17,6 +17,10 @@ UI
 ---
 The UI is just a collection view with a custom layout. It illustrates how a user interface could associate to the sequencer via NSIndexPath.
 
+NOTES
+-------
+If you have trouble running the code, you may need to use TAAE latest repository code instead of the Pod. The latest Pod is 1.4.8 and is a bit behind the code needed to run this code.
+
 
 
 
