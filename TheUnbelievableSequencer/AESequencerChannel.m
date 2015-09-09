@@ -15,7 +15,6 @@
     MusicPlayer _player;
     MusicSequence _sequence;
     float _sequenceBpm;
-    MIDIEndpointRef _endPoint;
 }
 
 // ---------------------------------------------------------------------------------------------------------
@@ -47,81 +46,9 @@
 - (void)setupWithAudioController:(AEAudioController *)audioController {
     [super setupWithAudioController:audioController];
     
+    // Keep a reference to the audio controller.
+    // (knowledge of the audio graph is needed)
     _audioController = audioController;
-    
-//    [self initMidiProxy];
-}
-
-// ---------------------------------------------------------------------------------------------------------
-#pragma mark - MIDI PROXY
-// ---------------------------------------------------------------------------------------------------------
-
-void midiNotifyProc(const MIDINotification *message, void *refCon) {
-    //    printf("Sequencer - midiNotifyProc()\n");
-}
-
-static void midiReadProc(const MIDIPacketList *pktlist, void *refCon, void *connRefCon) {
-    
-    //    printf("Sequencer - midiReadProc()\n");
-    
-    // Sweep packet list and:
-    // 1) convert packets to midi messages
-    // 2) emit all midi messages
-    AudioUnit *player = (AudioUnit*) refCon;
-    MIDIPacket *packet = (MIDIPacket*)pktlist->packet;
-    int numPackets = pktlist->numPackets;
-    //    NSLog(@"  numPackets: %d", numPackets);
-    for(int i = 0; i < numPackets; i++) {
-        
-//        NSLog(@"packet");
-        
-        // Sweep packet.
-        UInt16 numValidMidiBytes = packet->length;
-        int numMessages = (int)ceil((double)numValidMidiBytes / 3.0);
-        int byteIndex = 0;
-        for(int j = 0; j < numMessages; j++) {
-            
-            Byte status;
-            Byte data1;
-            Byte data2;
-            //        NSLog(@"  message #%d", i);
-            
-            // Status midi byte.
-            status = packet->data[j];
-            //        NSLog(@"    status: %d", status);
-            byteIndex++;
-            
-            // 1st midi data byte.
-            if(byteIndex < numValidMidiBytes) {
-                data1 = packet->data[j + 1];
-                byteIndex++;
-            }
-            
-            // 2nd midi data byte.
-            if(byteIndex < numValidMidiBytes) {
-                data2 = packet->data[j + 2];
-                byteIndex++;
-            }
-            
-            // Play instrument.
-            CheckError(MusicDeviceMIDIEvent(player, status, data1, data2, 0), "Error playing midi note.");
-        }
-        
-        // Next packet.
-        packet = MIDIPacketNext(packet);
-    }
-}
-
-- (void)initMidiProxy {
-    
-    // Create a midi client.
-    MIDIClientRef midiClient;
-    CheckError(MIDIClientCreate(CFSTR("VirtualMidiClient"), midiNotifyProc, NULL, &midiClient), "Error creating midi client.");
-    NSLog(@"  client created");
-    
-    // Create an end point.
-    CheckError(MIDIDestinationCreate(midiClient, CFSTR("VirtualMidiDestination"), midiReadProc, self.audioUnit, &_endPoint), "Error creating midi end point.");
-    NSLog(@"  end point created");
 }
 
 // ---------------------------------------------------------------------------------------------------------
@@ -143,9 +70,8 @@ static void midiReadProc(const MIDIPacketList *pktlist, void *refCon, void *conn
 //    CAShow(_sequence);
     
     // Use a proxy to route notes from the player to the sampler.
-//    CheckError(MusicSequenceSetMIDIEndpoint(_sequence, _endPoint), "Error connecting sampler.");
     CheckError(MusicSequenceSetAUGraph(_sequence, _audioController.audioGraph), "Error connecting sampler to sequence.");
-    CAShow(_audioController.audioGraph);
+//    CAShow(_audioController.audioGraph);
     
     // Load the sequence on the player.
     CheckError(MusicPlayerSetSequence(_player, _sequence), "Error setting music sequence.");
