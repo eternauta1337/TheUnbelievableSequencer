@@ -24,6 +24,8 @@
 
 - (instancetype)initWithPatternResolution:(float)resolution withNumTracks:(int)numTracks {
     
+    NSLog(@"AESequencerChannel - init()");
+    
     _isPlaying = NO;
     _resolution = resolution;
     _numTracks = numTracks;
@@ -47,7 +49,7 @@
     
     _audioController = audioController;
     
-    [self initMidiProxy];
+//    [self initMidiProxy];
 }
 
 // ---------------------------------------------------------------------------------------------------------
@@ -141,12 +143,13 @@ static void midiReadProc(const MIDIPacketList *pktlist, void *refCon, void *conn
 //    CAShow(_sequence);
     
     // Use a proxy to route notes from the player to the sampler.
-    CheckError(MusicSequenceSetMIDIEndpoint(_sequence, _endPoint), "Error connecting sampler.");
+//    CheckError(MusicSequenceSetMIDIEndpoint(_sequence, _endPoint), "Error connecting sampler.");
+    CheckError(MusicSequenceSetAUGraph(_sequence, _audioController.audioGraph), "Error connecting sampler to sequence.");
     CAShow(_audioController.audioGraph);
     
     // Load the sequence on the player.
     CheckError(MusicPlayerSetSequence(_player, _sequence), "Error setting music sequence.");
-    CheckError(MusicPlayerPreroll(_player), "Error preparing music player.");
+    CheckError(MusicPlayerPreroll(_player), "Error preparing the music player.");
     [self toggleLooping:YES onSequence:sequence];
     
     // Extract info from the sequence.

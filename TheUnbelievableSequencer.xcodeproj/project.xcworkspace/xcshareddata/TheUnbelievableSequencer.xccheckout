@@ -5,20 +5,24 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>8570684A-EB4C-4EB8-BAFC-B43AF333A841</string>
+	<string>7BE0F9D1-A5A4-466D-B66B-0F7947CE98DF</string>
 	<key>IDESourceControlProjectName</key>
 	<string>TheUnbelievableSequencer</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>DA83E3E0B7BA6BA46D576847F09E829658CFA27E</key>
 		<string>https://github.com/thepalebluedot/TheUnbelievableSequencer.git</string>
+		<key>F1BC4876811AFC3F9EBAC1327B95940A459E2E4A</key>
+		<string>https://github.com/TheAmazingAudioEngine/TheAmazingAudioEngine.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>TheUnbelievableSequencer.xcworkspace</string>
+	<string>TheUnbelievableSequencer.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>DA83E3E0B7BA6BA46D576847F09E829658CFA27E</key>
-		<string>..</string>
+		<string>../..</string>
+		<key>F1BC4876811AFC3F9EBAC1327B95940A459E2E4A</key>
+		<string>../../../../../zLibraries/TheAmazingAudioEngine</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/thepalebluedot/TheUnbelievableSequencer.git</string>
@@ -28,6 +32,14 @@
 	<string>DA83E3E0B7BA6BA46D576847F09E829658CFA27E</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F1BC4876811AFC3F9EBAC1327B95940A459E2E4A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>TheAmazingAudioEngine</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>

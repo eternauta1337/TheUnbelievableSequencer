@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "21C4958A1B7813F70030048A"
+               BlueprintIdentifier = "2129ECAC1BA035DF001EF50A"
                BuildableName = "TheUnbelievableSequencer.app"
                BlueprintName = "TheUnbelievableSequencer"
                ReferencedContainer = "container:TheUnbelievableSequencer.xcodeproj">
@@ -28,7 +28,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "21C495A31B7813F70030048A"
+               BlueprintIdentifier = "2129ECC51BA035DF001EF50A"
                BuildableName = "TheUnbelievableSequencerTests.xctest"
                BlueprintName = "TheUnbelievableSequencerTests"
                ReferencedContainer = "container:TheUnbelievableSequencer.xcodeproj">
@@ -46,7 +46,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "21C495A31B7813F70030048A"
+               BlueprintIdentifier = "2129ECC51BA035DF001EF50A"
                BuildableName = "TheUnbelievableSequencerTests.xctest"
                BlueprintName = "TheUnbelievableSequencerTests"
                ReferencedContainer = "container:TheUnbelievableSequencer.xcodeproj">
@@ -56,7 +56,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "21C4958A1B7813F70030048A"
+            BlueprintIdentifier = "2129ECAC1BA035DF001EF50A"
             BuildableName = "TheUnbelievableSequencer.app"
             BlueprintName = "TheUnbelievableSequencer"
             ReferencedContainer = "container:TheUnbelievableSequencer.xcodeproj">
@@ -76,7 +76,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "21C4958A1B7813F70030048A"
+            BlueprintIdentifier = "2129ECAC1BA035DF001EF50A"
             BuildableName = "TheUnbelievableSequencer.app"
             BlueprintName = "TheUnbelievableSequencer"
             ReferencedContainer = "container:TheUnbelievableSequencer.xcodeproj">
@@ -95,7 +95,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "21C4958A1B7813F70030048A"
+            BlueprintIdentifier = "2129ECAC1BA035DF001EF50A"
             BuildableName = "TheUnbelievableSequencer.app"
             BlueprintName = "TheUnbelievableSequencer"
             ReferencedContainer = "container:TheUnbelievableSequencer.xcodeproj">

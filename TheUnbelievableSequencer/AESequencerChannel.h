@@ -7,8 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AEAudioUnitChannel.h"
-#import "AEAudioController.h"
+#import "TheAmazingAudioEngine.h"
 
 @interface AESequencerChannel : AEAudioUnitChannel
 

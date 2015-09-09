@@ -55,13 +55,13 @@
     _sequencer = [[AESequencerChannel alloc] initWithPatternResolution:0.25 withNumTracks:5];
     [_audioController addChannels:@[_sequencer]];
     
-    // Load a sequence.
-    NSURL *midiURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Midis/pattern1" ofType:@"mid"]];
-    [_sequencer loadMidiFile:midiURL];
-    
     // Load a sound bank.
     NSURL *presetURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Presets/SimpleDrums" ofType:@"aupreset"]];
     [_sequencer loadPreset:presetURL];
+    
+    // Load a sequence.
+    NSURL *midiURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Midis/pattern1" ofType:@"mid"]];
+    [_sequencer loadMidiFile:midiURL];
 }
 
 - (void)initCollectionView {

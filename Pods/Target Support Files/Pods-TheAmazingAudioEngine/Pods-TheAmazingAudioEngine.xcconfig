@@ -1,1 +1,0 @@
-PODS_THEAMAZINGAUDIOENGINE_OTHER_LDFLAGS = -framework "Accelerate" -framework "AudioToolbox"

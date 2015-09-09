@@ -7,70 +7,91 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		21C495911B7813F70030048A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C495901B7813F70030048A /* main.m */; };
-		21C495941B7813F70030048A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C495931B7813F70030048A /* AppDelegate.m */; };
-		21C495971B7813F70030048A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C495961B7813F70030048A /* ViewController.m */; };
-		21C4959A1B7813F70030048A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21C495981B7813F70030048A /* Main.storyboard */; };
-		21C4959C1B7813F70030048A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21C4959B1B7813F70030048A /* Images.xcassets */; };
-		21C4959F1B7813F70030048A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21C4959D1B7813F70030048A /* LaunchScreen.xib */; };
-		21C495AB1B7813F70030048A /* TheUnbelievableSequencerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C495AA1B7813F70030048A /* TheUnbelievableSequencerTests.m */; };
-		21C495BB1B7814CF0030048A /* SequencerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C495B81B7814CF0030048A /* SequencerCell.m */; };
-		21C495BC1B7814CF0030048A /* SequencerLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C495BA1B7814CF0030048A /* SequencerLayout.m */; };
-		21C495C01B7814E30030048A /* AESequencerChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C495BF1B7814E30030048A /* AESequencerChannel.m */; };
-		21C495C41B7815120030048A /* Midis in Resources */ = {isa = PBXBuildFile; fileRef = 21C495C11B7815120030048A /* Midis */; };
-		21C495C51B7815120030048A /* Presets in Resources */ = {isa = PBXBuildFile; fileRef = 21C495C21B7815120030048A /* Presets */; };
-		21C495C61B7815120030048A /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = 21C495C31B7815120030048A /* Sounds */; };
-		A7A200F9D06F4FCD36E48347 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4BECFE0323E2BCC1E4D477D /* libPods.a */; };
+		2129ECB31BA035DF001EF50A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2129ECB21BA035DF001EF50A /* main.m */; };
+		2129ECB61BA035DF001EF50A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2129ECB51BA035DF001EF50A /* AppDelegate.m */; };
+		2129ECB91BA035DF001EF50A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2129ECB81BA035DF001EF50A /* ViewController.m */; };
+		2129ECBC1BA035DF001EF50A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2129ECBA1BA035DF001EF50A /* Main.storyboard */; };
+		2129ECBE1BA035DF001EF50A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2129ECBD1BA035DF001EF50A /* Images.xcassets */; };
+		2129ECC11BA035DF001EF50A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2129ECBF1BA035DF001EF50A /* LaunchScreen.xib */; };
+		2129ECCD1BA035DF001EF50A /* TheUnbelievableSequencerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2129ECCC1BA035DF001EF50A /* TheUnbelievableSequencerTests.m */; };
+		2129ECE01BA03637001EF50A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2129ECDF1BA03637001EF50A /* AudioToolbox.framework */; };
+		2129ECE21BA03640001EF50A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2129ECE11BA03640001EF50A /* AVFoundation.framework */; };
+		2129ECE41BA03646001EF50A /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2129ECE31BA03646001EF50A /* Accelerate.framework */; };
+		2129ECED1BA036DF001EF50A /* AESequencerChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2129ECE81BA036DF001EF50A /* AESequencerChannel.m */; };
+		2129ECEE1BA036DF001EF50A /* SequencerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2129ECEA1BA036DF001EF50A /* SequencerCell.m */; };
+		2129ECEF1BA036DF001EF50A /* SequencerLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2129ECEC1BA036DF001EF50A /* SequencerLayout.m */; };
+		2129ECF91BA03837001EF50A /* libTheAmazingAudioEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2129ECF61BA03826001EF50A /* libTheAmazingAudioEngine.a */; };
+		2129ECFD1BA038C7001EF50A /* Midis in Resources */ = {isa = PBXBuildFile; fileRef = 2129ECFA1BA038C7001EF50A /* Midis */; };
+		2129ECFE1BA038C7001EF50A /* Presets in Resources */ = {isa = PBXBuildFile; fileRef = 2129ECFB1BA038C7001EF50A /* Presets */; };
+		2129ECFF1BA038C7001EF50A /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = 2129ECFC1BA038C7001EF50A /* Sounds */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		21C495A51B7813F70030048A /* PBXContainerItemProxy */ = {
+		2129ECC71BA035DF001EF50A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 21C495831B7813F70030048A /* Project object */;
+			containerPortal = 2129ECA51BA035DF001EF50A /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 21C4958A1B7813F70030048A;
+			remoteGlobalIDString = 2129ECAC1BA035DF001EF50A;
 			remoteInfo = TheUnbelievableSequencer;
+		};
+		2129ECF51BA03826001EF50A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2129ECF11BA03826001EF50A /* TheAmazingAudioEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4C215CEC1523A7D500D36CAD;
+			remoteInfo = TheAmazingAudioEngine;
+		};
+		2129ECF71BA03833001EF50A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2129ECF11BA03826001EF50A /* TheAmazingAudioEngine.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4C215CEB1523A7D500D36CAD;
+			remoteInfo = TheAmazingAudioEngine;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		21C4958B1B7813F70030048A /* TheUnbelievableSequencer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheUnbelievableSequencer.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		21C4958F1B7813F70030048A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		21C495901B7813F70030048A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		21C495921B7813F70030048A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		21C495931B7813F70030048A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		21C495951B7813F70030048A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		21C495961B7813F70030048A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		21C495991B7813F70030048A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		21C4959B1B7813F70030048A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		21C4959E1B7813F70030048A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		21C495A41B7813F70030048A /* TheUnbelievableSequencerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheUnbelievableSequencerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		21C495A91B7813F70030048A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		21C495AA1B7813F70030048A /* TheUnbelievableSequencerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TheUnbelievableSequencerTests.m; sourceTree = "<group>"; };
-		21C495B71B7814CF0030048A /* SequencerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SequencerCell.h; sourceTree = "<group>"; };
-		21C495B81B7814CF0030048A /* SequencerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SequencerCell.m; sourceTree = "<group>"; };
-		21C495B91B7814CF0030048A /* SequencerLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SequencerLayout.h; sourceTree = "<group>"; };
-		21C495BA1B7814CF0030048A /* SequencerLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SequencerLayout.m; sourceTree = "<group>"; };
-		21C495BE1B7814E30030048A /* AESequencerChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESequencerChannel.h; sourceTree = "<group>"; };
-		21C495BF1B7814E30030048A /* AESequencerChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESequencerChannel.m; sourceTree = "<group>"; };
-		21C495C11B7815120030048A /* Midis */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Midis; sourceTree = SOURCE_ROOT; };
-		21C495C21B7815120030048A /* Presets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Presets; sourceTree = SOURCE_ROOT; };
-		21C495C31B7815120030048A /* Sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sounds; sourceTree = SOURCE_ROOT; };
-		8C7DE5DB4E1B12136EC9E645 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		E4BECFE0323E2BCC1E4D477D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		EABBCE3430B4D9C22AA6152E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		2129ECAD1BA035DF001EF50A /* TheUnbelievableSequencer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheUnbelievableSequencer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2129ECB11BA035DF001EF50A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2129ECB21BA035DF001EF50A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2129ECB41BA035DF001EF50A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		2129ECB51BA035DF001EF50A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		2129ECB71BA035DF001EF50A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		2129ECB81BA035DF001EF50A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		2129ECBB1BA035DF001EF50A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2129ECBD1BA035DF001EF50A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		2129ECC01BA035DF001EF50A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		2129ECC61BA035DF001EF50A /* TheUnbelievableSequencerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheUnbelievableSequencerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2129ECCB1BA035DF001EF50A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2129ECCC1BA035DF001EF50A /* TheUnbelievableSequencerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TheUnbelievableSequencerTests.m; sourceTree = "<group>"; };
+		2129ECDF1BA03637001EF50A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		2129ECE11BA03640001EF50A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		2129ECE31BA03646001EF50A /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		2129ECE71BA036DF001EF50A /* AESequencerChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESequencerChannel.h; sourceTree = "<group>"; };
+		2129ECE81BA036DF001EF50A /* AESequencerChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESequencerChannel.m; sourceTree = "<group>"; };
+		2129ECE91BA036DF001EF50A /* SequencerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SequencerCell.h; sourceTree = "<group>"; };
+		2129ECEA1BA036DF001EF50A /* SequencerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SequencerCell.m; sourceTree = "<group>"; };
+		2129ECEB1BA036DF001EF50A /* SequencerLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SequencerLayout.h; sourceTree = "<group>"; };
+		2129ECEC1BA036DF001EF50A /* SequencerLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SequencerLayout.m; sourceTree = "<group>"; };
+		2129ECF11BA03826001EF50A /* TheAmazingAudioEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TheAmazingAudioEngine.xcodeproj; path = ../../../zLibraries/TheAmazingAudioEngine/TheAmazingAudioEngine.xcodeproj; sourceTree = "<group>"; };
+		2129ECFA1BA038C7001EF50A /* Midis */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Midis; sourceTree = SOURCE_ROOT; };
+		2129ECFB1BA038C7001EF50A /* Presets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Presets; sourceTree = SOURCE_ROOT; };
+		2129ECFC1BA038C7001EF50A /* Sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sounds; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		21C495881B7813F70030048A /* Frameworks */ = {
+		2129ECAA1BA035DF001EF50A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7A200F9D06F4FCD36E48347 /* libPods.a in Frameworks */,
+				2129ECF91BA03837001EF50A /* libTheAmazingAudioEngine.a in Frameworks */,
+				2129ECE41BA03646001EF50A /* Accelerate.framework in Frameworks */,
+				2129ECE21BA03640001EF50A /* AVFoundation.framework in Frameworks */,
+				2129ECE01BA03637001EF50A /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		21C495A11B7813F70030048A /* Frameworks */ = {
+		2129ECC31BA035DF001EF50A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -80,184 +101,144 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0B2DA099C6E33F0D872DF880 /* Pods */ = {
+		2129ECA41BA035DF001EF50A = {
 			isa = PBXGroup;
 			children = (
-				EABBCE3430B4D9C22AA6152E /* Pods.debug.xcconfig */,
-				8C7DE5DB4E1B12136EC9E645 /* Pods.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		21C495821B7813F70030048A = {
-			isa = PBXGroup;
-			children = (
-				21C4958D1B7813F70030048A /* TheUnbelievableSequencer */,
-				21C495A71B7813F70030048A /* TheUnbelievableSequencerTests */,
-				21C4958C1B7813F70030048A /* Products */,
-				0B2DA099C6E33F0D872DF880 /* Pods */,
-				967AA8E231D5DBB5D83E12DA /* Frameworks */,
+				2129ECF11BA03826001EF50A /* TheAmazingAudioEngine.xcodeproj */,
+				2129ECAF1BA035DF001EF50A /* TheUnbelievableSequencer */,
+				2129ECC91BA035DF001EF50A /* TheUnbelievableSequencerTests */,
+				2129ECAE1BA035DF001EF50A /* Products */,
+				2129ECE31BA03646001EF50A /* Accelerate.framework */,
+				2129ECE11BA03640001EF50A /* AVFoundation.framework */,
+				2129ECDF1BA03637001EF50A /* AudioToolbox.framework */,
 			);
 			sourceTree = "<group>";
 		};
-		21C4958C1B7813F70030048A /* Products */ = {
+		2129ECAE1BA035DF001EF50A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				21C4958B1B7813F70030048A /* TheUnbelievableSequencer.app */,
-				21C495A41B7813F70030048A /* TheUnbelievableSequencerTests.xctest */,
+				2129ECAD1BA035DF001EF50A /* TheUnbelievableSequencer.app */,
+				2129ECC61BA035DF001EF50A /* TheUnbelievableSequencerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		21C4958D1B7813F70030048A /* TheUnbelievableSequencer */ = {
+		2129ECAF1BA035DF001EF50A /* TheUnbelievableSequencer */ = {
 			isa = PBXGroup;
 			children = (
-				21C495921B7813F70030048A /* AppDelegate.h */,
-				21C495931B7813F70030048A /* AppDelegate.m */,
-				21C495BD1B7814D80030048A /* Sequencer */,
-				21C495B41B7814A00030048A /* View */,
-				21C495C11B7815120030048A /* Midis */,
-				21C495C21B7815120030048A /* Presets */,
-				21C495C31B7815120030048A /* Sounds */,
-				21C4959B1B7813F70030048A /* Images.xcassets */,
-				21C4958E1B7813F70030048A /* Supporting Files */,
+				2129ECB41BA035DF001EF50A /* AppDelegate.h */,
+				2129ECB51BA035DF001EF50A /* AppDelegate.m */,
+				2129ECB71BA035DF001EF50A /* ViewController.h */,
+				2129ECB81BA035DF001EF50A /* ViewController.m */,
+				2129ECE71BA036DF001EF50A /* AESequencerChannel.h */,
+				2129ECE81BA036DF001EF50A /* AESequencerChannel.m */,
+				2129ECE91BA036DF001EF50A /* SequencerCell.h */,
+				2129ECEA1BA036DF001EF50A /* SequencerCell.m */,
+				2129ECEB1BA036DF001EF50A /* SequencerLayout.h */,
+				2129ECEC1BA036DF001EF50A /* SequencerLayout.m */,
+				2129ECBA1BA035DF001EF50A /* Main.storyboard */,
+				2129ECBD1BA035DF001EF50A /* Images.xcassets */,
+				2129ECBF1BA035DF001EF50A /* LaunchScreen.xib */,
+				2129ECFA1BA038C7001EF50A /* Midis */,
+				2129ECFB1BA038C7001EF50A /* Presets */,
+				2129ECFC1BA038C7001EF50A /* Sounds */,
+				2129ECB01BA035DF001EF50A /* Supporting Files */,
 			);
 			path = TheUnbelievableSequencer;
 			sourceTree = "<group>";
 		};
-		21C4958E1B7813F70030048A /* Supporting Files */ = {
+		2129ECB01BA035DF001EF50A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				21C4958F1B7813F70030048A /* Info.plist */,
-				21C495901B7813F70030048A /* main.m */,
+				2129ECB11BA035DF001EF50A /* Info.plist */,
+				2129ECB21BA035DF001EF50A /* main.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		21C495A71B7813F70030048A /* TheUnbelievableSequencerTests */ = {
+		2129ECC91BA035DF001EF50A /* TheUnbelievableSequencerTests */ = {
 			isa = PBXGroup;
 			children = (
-				21C495AA1B7813F70030048A /* TheUnbelievableSequencerTests.m */,
-				21C495A81B7813F70030048A /* Supporting Files */,
+				2129ECCC1BA035DF001EF50A /* TheUnbelievableSequencerTests.m */,
+				2129ECCA1BA035DF001EF50A /* Supporting Files */,
 			);
 			path = TheUnbelievableSequencerTests;
 			sourceTree = "<group>";
 		};
-		21C495A81B7813F70030048A /* Supporting Files */ = {
+		2129ECCA1BA035DF001EF50A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				21C495A91B7813F70030048A /* Info.plist */,
+				2129ECCB1BA035DF001EF50A /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		21C495B41B7814A00030048A /* View */ = {
+		2129ECF21BA03826001EF50A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				21C495951B7813F70030048A /* ViewController.h */,
-				21C495961B7813F70030048A /* ViewController.m */,
-				21C495B61B7814B70030048A /* CollectionStuff */,
-				21C495B51B7814AA0030048A /* Storyboards */,
+				2129ECF61BA03826001EF50A /* libTheAmazingAudioEngine.a */,
 			);
-			name = View;
-			sourceTree = "<group>";
-		};
-		21C495B51B7814AA0030048A /* Storyboards */ = {
-			isa = PBXGroup;
-			children = (
-				21C495981B7813F70030048A /* Main.storyboard */,
-				21C4959D1B7813F70030048A /* LaunchScreen.xib */,
-			);
-			name = Storyboards;
-			sourceTree = "<group>";
-		};
-		21C495B61B7814B70030048A /* CollectionStuff */ = {
-			isa = PBXGroup;
-			children = (
-				21C495B71B7814CF0030048A /* SequencerCell.h */,
-				21C495B81B7814CF0030048A /* SequencerCell.m */,
-				21C495B91B7814CF0030048A /* SequencerLayout.h */,
-				21C495BA1B7814CF0030048A /* SequencerLayout.m */,
-			);
-			name = CollectionStuff;
-			sourceTree = "<group>";
-		};
-		21C495BD1B7814D80030048A /* Sequencer */ = {
-			isa = PBXGroup;
-			children = (
-				21C495BE1B7814E30030048A /* AESequencerChannel.h */,
-				21C495BF1B7814E30030048A /* AESequencerChannel.m */,
-			);
-			name = Sequencer;
-			sourceTree = "<group>";
-		};
-		967AA8E231D5DBB5D83E12DA /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				E4BECFE0323E2BCC1E4D477D /* libPods.a */,
-			);
-			name = Frameworks;
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		21C4958A1B7813F70030048A /* TheUnbelievableSequencer */ = {
+		2129ECAC1BA035DF001EF50A /* TheUnbelievableSequencer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 21C495AE1B7813F70030048A /* Build configuration list for PBXNativeTarget "TheUnbelievableSequencer" */;
+			buildConfigurationList = 2129ECD01BA035DF001EF50A /* Build configuration list for PBXNativeTarget "TheUnbelievableSequencer" */;
 			buildPhases = (
-				573367E7C654EF4300701530 /* Check Pods Manifest.lock */,
-				21C495871B7813F70030048A /* Sources */,
-				21C495881B7813F70030048A /* Frameworks */,
-				21C495891B7813F70030048A /* Resources */,
-				510FE5299274AF1BEA124932 /* Copy Pods Resources */,
+				2129ECA91BA035DF001EF50A /* Sources */,
+				2129ECAA1BA035DF001EF50A /* Frameworks */,
+				2129ECAB1BA035DF001EF50A /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				2129ECF81BA03833001EF50A /* PBXTargetDependency */,
 			);
 			name = TheUnbelievableSequencer;
 			productName = TheUnbelievableSequencer;
-			productReference = 21C4958B1B7813F70030048A /* TheUnbelievableSequencer.app */;
+			productReference = 2129ECAD1BA035DF001EF50A /* TheUnbelievableSequencer.app */;
 			productType = "com.apple.product-type.application";
 		};
-		21C495A31B7813F70030048A /* TheUnbelievableSequencerTests */ = {
+		2129ECC51BA035DF001EF50A /* TheUnbelievableSequencerTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 21C495B11B7813F70030048A /* Build configuration list for PBXNativeTarget "TheUnbelievableSequencerTests" */;
+			buildConfigurationList = 2129ECD31BA035DF001EF50A /* Build configuration list for PBXNativeTarget "TheUnbelievableSequencerTests" */;
 			buildPhases = (
-				21C495A01B7813F70030048A /* Sources */,
-				21C495A11B7813F70030048A /* Frameworks */,
-				21C495A21B7813F70030048A /* Resources */,
+				2129ECC21BA035DF001EF50A /* Sources */,
+				2129ECC31BA035DF001EF50A /* Frameworks */,
+				2129ECC41BA035DF001EF50A /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				21C495A61B7813F70030048A /* PBXTargetDependency */,
+				2129ECC81BA035DF001EF50A /* PBXTargetDependency */,
 			);
 			name = TheUnbelievableSequencerTests;
 			productName = TheUnbelievableSequencerTests;
-			productReference = 21C495A41B7813F70030048A /* TheUnbelievableSequencerTests.xctest */;
+			productReference = 2129ECC61BA035DF001EF50A /* TheUnbelievableSequencerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		21C495831B7813F70030048A /* Project object */ = {
+		2129ECA51BA035DF001EF50A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0640;
-				ORGANIZATIONNAME = Palebluedot;
+				ORGANIZATIONNAME = "Alejandro Santander";
 				TargetAttributes = {
-					21C4958A1B7813F70030048A = {
+					2129ECAC1BA035DF001EF50A = {
 						CreatedOnToolsVersion = 6.4;
 					};
-					21C495A31B7813F70030048A = {
+					2129ECC51BA035DF001EF50A = {
 						CreatedOnToolsVersion = 6.4;
-						TestTargetID = 21C4958A1B7813F70030048A;
+						TestTargetID = 2129ECAC1BA035DF001EF50A;
 					};
 				};
 			};
-			buildConfigurationList = 21C495861B7813F70030048A /* Build configuration list for PBXProject "TheUnbelievableSequencer" */;
+			buildConfigurationList = 2129ECA81BA035DF001EF50A /* Build configuration list for PBXProject "TheUnbelievableSequencer" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -265,32 +246,48 @@
 				en,
 				Base,
 			);
-			mainGroup = 21C495821B7813F70030048A;
-			productRefGroup = 21C4958C1B7813F70030048A /* Products */;
+			mainGroup = 2129ECA41BA035DF001EF50A;
+			productRefGroup = 2129ECAE1BA035DF001EF50A /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 2129ECF21BA03826001EF50A /* Products */;
+					ProjectRef = 2129ECF11BA03826001EF50A /* TheAmazingAudioEngine.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
-				21C4958A1B7813F70030048A /* TheUnbelievableSequencer */,
-				21C495A31B7813F70030048A /* TheUnbelievableSequencerTests */,
+				2129ECAC1BA035DF001EF50A /* TheUnbelievableSequencer */,
+				2129ECC51BA035DF001EF50A /* TheUnbelievableSequencerTests */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		2129ECF61BA03826001EF50A /* libTheAmazingAudioEngine.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libTheAmazingAudioEngine.a;
+			remoteRef = 2129ECF51BA03826001EF50A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
-		21C495891B7813F70030048A /* Resources */ = {
+		2129ECAB1BA035DF001EF50A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21C495C61B7815120030048A /* Sounds in Resources */,
-				21C495C51B7815120030048A /* Presets in Resources */,
-				21C4959A1B7813F70030048A /* Main.storyboard in Resources */,
-				21C4959F1B7813F70030048A /* LaunchScreen.xib in Resources */,
-				21C4959C1B7813F70030048A /* Images.xcassets in Resources */,
-				21C495C41B7815120030048A /* Midis in Resources */,
+				2129ECFF1BA038C7001EF50A /* Sounds in Resources */,
+				2129ECFE1BA038C7001EF50A /* Presets in Resources */,
+				2129ECBC1BA035DF001EF50A /* Main.storyboard in Resources */,
+				2129ECC11BA035DF001EF50A /* LaunchScreen.xib in Resources */,
+				2129ECBE1BA035DF001EF50A /* Images.xcassets in Resources */,
+				2129ECFD1BA038C7001EF50A /* Midis in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		21C495A21B7813F70030048A /* Resources */ = {
+		2129ECC41BA035DF001EF50A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -299,84 +296,56 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		510FE5299274AF1BEA124932 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		573367E7C654EF4300701530 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		21C495871B7813F70030048A /* Sources */ = {
+		2129ECA91BA035DF001EF50A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21C495971B7813F70030048A /* ViewController.m in Sources */,
-				21C495C01B7814E30030048A /* AESequencerChannel.m in Sources */,
-				21C495BC1B7814CF0030048A /* SequencerLayout.m in Sources */,
-				21C495BB1B7814CF0030048A /* SequencerCell.m in Sources */,
-				21C495941B7813F70030048A /* AppDelegate.m in Sources */,
-				21C495911B7813F70030048A /* main.m in Sources */,
+				2129ECB91BA035DF001EF50A /* ViewController.m in Sources */,
+				2129ECEF1BA036DF001EF50A /* SequencerLayout.m in Sources */,
+				2129ECED1BA036DF001EF50A /* AESequencerChannel.m in Sources */,
+				2129ECB61BA035DF001EF50A /* AppDelegate.m in Sources */,
+				2129ECB31BA035DF001EF50A /* main.m in Sources */,
+				2129ECEE1BA036DF001EF50A /* SequencerCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		21C495A01B7813F70030048A /* Sources */ = {
+		2129ECC21BA035DF001EF50A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21C495AB1B7813F70030048A /* TheUnbelievableSequencerTests.m in Sources */,
+				2129ECCD1BA035DF001EF50A /* TheUnbelievableSequencerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		21C495A61B7813F70030048A /* PBXTargetDependency */ = {
+		2129ECC81BA035DF001EF50A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 21C4958A1B7813F70030048A /* TheUnbelievableSequencer */;
-			targetProxy = 21C495A51B7813F70030048A /* PBXContainerItemProxy */;
+			target = 2129ECAC1BA035DF001EF50A /* TheUnbelievableSequencer */;
+			targetProxy = 2129ECC71BA035DF001EF50A /* PBXContainerItemProxy */;
+		};
+		2129ECF81BA03833001EF50A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TheAmazingAudioEngine;
+			targetProxy = 2129ECF71BA03833001EF50A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		21C495981B7813F70030048A /* Main.storyboard */ = {
+		2129ECBA1BA035DF001EF50A /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				21C495991B7813F70030048A /* Base */,
+				2129ECBB1BA035DF001EF50A /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		21C4959D1B7813F70030048A /* LaunchScreen.xib */ = {
+		2129ECBF1BA035DF001EF50A /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				21C4959E1B7813F70030048A /* Base */,
+				2129ECC01BA035DF001EF50A /* Base */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
@@ -384,7 +353,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		21C495AC1B7813F70030048A /* Debug */ = {
+		2129ECCE1BA035DF001EF50A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -424,10 +393,11 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		21C495AD1B7813F70030048A /* Release */ = {
+		2129ECCF1BA035DF001EF50A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -460,35 +430,44 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		21C495AF1B7813F70030048A /* Debug */ = {
+		2129ECD11BA035DF001EF50A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EABBCE3430B4D9C22AA6152E /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					../../../zLibraries/TheAmazingAudioEngine/TheAmazingAudioEngine,
+				);
 				INFOPLIST_FILE = TheUnbelievableSequencer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
-		21C495B01B7813F70030048A /* Release */ = {
+		2129ECD21BA035DF001EF50A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8C7DE5DB4E1B12136EC9E645 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					../../../zLibraries/TheAmazingAudioEngine/TheAmazingAudioEngine,
+				);
 				INFOPLIST_FILE = TheUnbelievableSequencer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
-		21C495B21B7813F70030048A /* Debug */ = {
+		2129ECD41BA035DF001EF50A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -507,7 +486,7 @@
 			};
 			name = Debug;
 		};
-		21C495B31B7813F70030048A /* Release */ = {
+		2129ECD51BA035DF001EF50A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -525,34 +504,34 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		21C495861B7813F70030048A /* Build configuration list for PBXProject "TheUnbelievableSequencer" */ = {
+		2129ECA81BA035DF001EF50A /* Build configuration list for PBXProject "TheUnbelievableSequencer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				21C495AC1B7813F70030048A /* Debug */,
-				21C495AD1B7813F70030048A /* Release */,
+				2129ECCE1BA035DF001EF50A /* Debug */,
+				2129ECCF1BA035DF001EF50A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		21C495AE1B7813F70030048A /* Build configuration list for PBXNativeTarget "TheUnbelievableSequencer" */ = {
+		2129ECD01BA035DF001EF50A /* Build configuration list for PBXNativeTarget "TheUnbelievableSequencer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				21C495AF1B7813F70030048A /* Debug */,
-				21C495B01B7813F70030048A /* Release */,
+				2129ECD11BA035DF001EF50A /* Debug */,
+				2129ECD21BA035DF001EF50A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		21C495B11B7813F70030048A /* Build configuration list for PBXNativeTarget "TheUnbelievableSequencerTests" */ = {
+		2129ECD31BA035DF001EF50A /* Build configuration list for PBXNativeTarget "TheUnbelievableSequencerTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				21C495B21B7813F70030048A /* Debug */,
-				21C495B31B7813F70030048A /* Release */,
+				2129ECD41BA035DF001EF50A /* Debug */,
+				2129ECD51BA035DF001EF50A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 21C495831B7813F70030048A /* Project object */;
+	rootObject = 2129ECA51BA035DF001EF50A /* Project object */;
 }
