@@ -35,7 +35,7 @@
     self = [super initWithComponentDescription:componentDescription];
     
     // Create a MusicPlayer to control playback.
-    CheckError(NewMusicPlayer(&_player), "Error creating music player.");
+    AECheckOSStatus(NewMusicPlayer(&_player), "Error creating music player.");
     
     // Init data.
     _pattern = [NSMutableDictionary dictionary];
@@ -59,8 +59,8 @@
     
     // Load and parse the midi data.
     MusicSequence sequence;
-    CheckError(NewMusicSequence(&sequence), "Error creating music sequence.");
-    CheckError(MusicSequenceFileLoad(sequence, (__bridge CFURLRef)fileURL, 0, 0), "Error loading midi.");
+    AECheckOSStatus(NewMusicSequence(&sequence), "Error creating music sequence.");
+    AECheckOSStatus(MusicSequenceFileLoad(sequence, (__bridge CFURLRef)fileURL, 0, 0), "Error loading midi.");
     [self loadSequence:sequence];
 }
 
@@ -70,12 +70,12 @@
 //    CAShow(_sequence);
     
     // Use a proxy to route notes from the player to the sampler.
-    CheckError(MusicSequenceSetAUGraph(_sequence, _audioController.audioGraph), "Error connecting sampler to sequence.");
+    AECheckOSStatus(MusicSequenceSetAUGraph(_sequence, _audioController.audioGraph), "Error connecting sampler to sequence.");
 //    CAShow(_audioController.audioGraph);
     
     // Load the sequence on the player.
-    CheckError(MusicPlayerSetSequence(_player, _sequence), "Error setting music sequence.");
-    CheckError(MusicPlayerPreroll(_player), "Error preparing the music player.");
+    AECheckOSStatus(MusicPlayerSetSequence(_player, _sequence), "Error setting music sequence.");
+    AECheckOSStatus(MusicPlayerPreroll(_player), "Error preparing the music player.");
     [self toggleLooping:YES onSequence:sequence];
     
     // Extract info from the sequence.
@@ -91,16 +91,16 @@
     
     // Get number of tracks.
     UInt32 numberOfTracks;
-    CheckError(MusicSequenceGetTrackCount(_sequence, &numberOfTracks), "Error getting number of tracks.");
-    NSLog(@"  numberOfTracks: %d", (unsigned int)numberOfTracks);
+    AECheckOSStatus(MusicSequenceGetTrackCount(_sequence, &numberOfTracks), "Error getting number of tracks.");
+//    NSLog(@"  numberOfTracks: %d", (unsigned int)numberOfTracks);
     
     // Get tempo info.
-    CheckError(MusicSequenceGetTempoTrack(_sequence, &track), "Error getting tempo track");
+    AECheckOSStatus(MusicSequenceGetTempoTrack(_sequence, &track), "Error getting tempo track");
     SInt16 ppqn;
     UInt32 length; // number of events in tempo track
-    CheckError(MusicTrackGetProperty(track, kSequenceTrackProperty_TimeResolution, &ppqn, &length), "Error getting time resolution.");
-    NSLog(@"  ppqn: %d", ppqn);
-    NSLog(@"  length: %d", (unsigned int)length);
+    AECheckOSStatus(MusicTrackGetProperty(track, kSequenceTrackProperty_TimeResolution, &ppqn, &length), "Error getting time resolution.");
+//    NSLog(@"  ppqn: %d", ppqn);
+//    NSLog(@"  length: %d", (unsigned int)length);
     
     // Sweep tempo track events.
     MusicEventIterator iterator = NULL;
@@ -123,8 +123,8 @@
         MusicEventIteratorGetEventInfo(iterator, &timestamp, &eventType, &eventData, &eventDataSize);
 //        NSLog(@"    timestamp: %f (beats)", timestamp);
 //        NSLog(@"    eventType: %d", (unsigned int)eventType);
-        //            NSLog(@"    eventDataSize: %d", (unsigned int)eventDataSize);
-        //            NSLog(@"    eventData: %d", eventData);
+//            NSLog(@"    eventDataSize: %d", (unsigned int)eventDataSize);
+//            NSLog(@"    eventData: %d", eventData);
         
         // TEMPO EVENT
         if(eventType == kMusicEventType_ExtendedTempo) {
@@ -138,7 +138,7 @@
         MusicEventIteratorNextEvent(iterator);
         j++;
     }
-    NSLog(@"  bpm: %f", _bpm);
+//    NSLog(@"  bpm: %f", _bpm);
 }
 
 // ---------------------------------------------------------------------------------------------------------
@@ -153,12 +153,12 @@
     // Get track 1. (0 is tempo).
     int trackIndex = 1;
     MusicTrack track;
-    CheckError(MusicSequenceGetIndTrack(_sequence, trackIndex, &track), "Error getting track.");
+    AECheckOSStatus(MusicSequenceGetIndTrack(_sequence, trackIndex, &track), "Error getting track.");
     
     // Clear MusicTrack at location.
     MusicTimeStamp startTime = indexPath.row * _resolution;
     MusicTimeStamp endTime = startTime + _resolution;
-    CheckError(MusicTrackClear(track, startTime, endTime), "Error clearing music track.");
+    AECheckOSStatus(MusicTrackClear(track, startTime, endTime), "Error clearing music track.");
     
     // Review section.
     for(int i = 0; i < _numTracks; i++) {
@@ -169,7 +169,7 @@
             note.channel = 1;
             note.velocity = 100.00;
             note.duration = _resolution;
-            CheckError(MusicTrackNewMIDINoteEvent(track, startTime, &note), "Error adding note.");
+            AECheckOSStatus(MusicTrackNewMIDINoteEvent(track, startTime, &note), "Error adding note.");
         }
     }
 }
@@ -179,12 +179,12 @@
     // Get track 1. (0 is tempo).
     int trackIndex = 1;
     MusicTrack track;
-    CheckError(MusicSequenceGetIndTrack(_sequence, trackIndex, &track), "Error getting track.");
+    AECheckOSStatus(MusicSequenceGetIndTrack(_sequence, trackIndex, &track), "Error getting track.");
     
     // Get track info.
     MusicTimeStamp trackLength = 0;
     UInt32 trackLenLength_size = sizeof(trackLength);
-    CheckError(MusicTrackGetProperty(track, kSequenceTrackProperty_TrackLength, &trackLength, &trackLenLength_size), "Error getting track info");
+    AECheckOSStatus(MusicTrackGetProperty(track, kSequenceTrackProperty_TrackLength, &trackLength, &trackLenLength_size), "Error getting track info");
     _patternLengthInBeats = trackLength;
     
     // Sweep events and convert notes to the grid.
@@ -249,7 +249,7 @@
     auPreset.instrumentType = kInstrumentType_AUPreset;
     
     // Load preset.
-    CheckError(AudioUnitSetProperty(self.audioUnit,
+    AECheckOSStatus(AudioUnitSetProperty(self.audioUnit,
                                     kAUSamplerProperty_LoadInstrument,
                                     kAudioUnitScope_Global,
                                     0,
@@ -267,7 +267,7 @@
 
 - (void)play {
     if(_isPlaying) return;
-    CheckError(MusicPlayerStart(_player), "Error starting music player.");
+    AECheckOSStatus(MusicPlayerStart(_player), "Error starting music player.");
     _isPlaying = YES;
 }
 
@@ -281,7 +281,7 @@
     
     // Get position.
     MusicTimeStamp time;
-    CheckError(MusicPlayerGetTime(_player, &time), "Error getting position");
+    AECheckOSStatus(MusicPlayerGetTime(_player, &time), "Error getting position");
     
     // Calculate position in loop.
     float loopPos = (float)time / (float)_patternLengthInBeats;
@@ -329,24 +329,6 @@
         MusicTrackLoopInfo loopInfo = { trackLength, 0 }; // loopDuration:MusicTimeStamp, numberOfLoops:SInt32
         MusicTrackSetProperty(track, kSequenceTrackProperty_LoopInfo, &loopInfo, sizeof(loopInfo));
     }
-}
-
-static void CheckError(OSStatus error, const char *operation) {
-    if (error == noErr) return;
-    
-    char errorString[20];
-    // see if it appears to be a 4-char-code
-    *(UInt32 *)(errorString + 1) = CFSwapInt32HostToBig(error);
-    if (isprint(errorString[1]) && isprint(errorString[2]) && isprint(errorString[3]) && isprint(errorString[4])) {
-        errorString[0] = errorString[5] = '\'';
-        errorString[6] = '\0';
-    } else
-        // no, format it as an integer
-        sprintf(errorString, "%d", (int)error);
-    
-    fprintf(stderr, "Error: %s (%s)\n", operation, errorString);
-    
-    exit(1);
 }
 
 @end
