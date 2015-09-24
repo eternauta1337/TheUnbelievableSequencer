@@ -1,6 +1,6 @@
 //
 //  SequencerCell.m
-//  SequencerExperiment
+//  TheUnbelievableSequencer
 //
 //  Created by Alejandro Santander on 7/20/15.
 //  Copyright (c) 2015 Humane Engineering. All rights reserved.

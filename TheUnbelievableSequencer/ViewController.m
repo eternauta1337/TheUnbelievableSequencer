@@ -1,6 +1,6 @@
 //
 //  ViewController.m
-//  TheAcceptableSequencer
+//  TheUnbelievableSequencer
 //
 //  Created by Alejandro Santander on 8/1/15.
 //  Copyright (c) 2015 Palebluedot. All rights reserved.
@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "AEAudioController.h"
 #import "AESequencerChannel.h"
+#import "AEMusicSequence.h"
 #import "SequencerLayout.h"
 #import "SequencerCell.h"
 
@@ -52,16 +53,17 @@
 - (void)initTheUnbelievableSequencer {
     
     // The sequencer is just like any other TAAE channel.
-    _sequencer = [[AESequencerChannel alloc] initWithPatternResolution:0.25 withNumTracks:5];
+    _sequencer = [[AESequencerChannel alloc] init];
     [_audioController addChannels:@[_sequencer]];
-    
-    // Load a sound bank.
-    NSURL *presetURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Presets/SimpleDrums" ofType:@"aupreset"]];
-    [_sequencer loadPreset:presetURL];
     
     // Load a sequence.
     NSURL *midiURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Midis/pattern1" ofType:@"mid"]];
-    [_sequencer loadMidiFile:midiURL];
+    AEMusicSequence *sequence = [[AEMusicSequence alloc] initWithMidiFile:midiURL resolution:0.25 numTracks:5];
+    _sequencer.sequence = sequence;
+    
+    // Load a sound bank.
+    NSURL *presetURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Presets/SimpleDrums" ofType:@"aupreset"]];
+    _sequencer.preset = presetURL;
 }
 
 - (void)initCollectionView {
@@ -70,7 +72,9 @@
     _collectionView.dataSource = self;
     
     // Custom layout.
-    SequencerLayout *layout = [[SequencerLayout alloc] initWithNumberOfKeys:_sequencer.numTracks numberOfPulses:_sequencer.numPulses collectionViewSize:_collectionView.frame.size];
+    SequencerLayout *layout = [[SequencerLayout alloc] initWithNumberOfKeys:_sequencer.sequence.numTracks
+                                                             numberOfPulses:_sequencer.sequence.numPulses
+                                                         collectionViewSize:_collectionView.frame.size];
     [_collectionView setCollectionViewLayout:layout];
     
     // Listen to notifications from cells.
@@ -103,7 +107,7 @@
     NSIndexPath *indexPath = notification.userInfo[@"indexPath"];
     
     // Affect pattern.
-    [_sequencer toggleNoteOnAtIndexPath:indexPath on:cell.enabled];
+    [_sequencer.sequence toggleNoteOnAtIndexPath:indexPath on:cell.enabled];
 }
 
 // ---------------------------------------------------------------------------------------------------------
@@ -139,7 +143,7 @@
     SequencerCell *cell = (SequencerCell*)[_collectionView dequeueReusableCellWithReuseIdentifier:@"SequencerCell" forIndexPath:indexPath];
     
     // Configure cell.
-    cell.enabled = [_sequencer isNoteOnAtIndexPath:indexPath];
+    cell.enabled = [_sequencer.sequence isNoteOnAtIndexPath:indexPath];
     cell.indexPath = indexPath;
     
     return cell;
@@ -147,12 +151,12 @@
 
 // # SECTIONS
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return _sequencer.numTracks;
+    return _sequencer.sequence.numTracks;
 }
 
 // # ITEMS PER SECTION
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return _sequencer.numPulses;
+    return _sequencer.sequence.numPulses;
 }
 
 // ---------------------------------------------------------------------------------------------------------

@@ -24,6 +24,7 @@
 		2129ECFD1BA038C7001EF50A /* Midis in Resources */ = {isa = PBXBuildFile; fileRef = 2129ECFA1BA038C7001EF50A /* Midis */; };
 		2129ECFE1BA038C7001EF50A /* Presets in Resources */ = {isa = PBXBuildFile; fileRef = 2129ECFB1BA038C7001EF50A /* Presets */; };
 		2129ECFF1BA038C7001EF50A /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = 2129ECFC1BA038C7001EF50A /* Sounds */; };
+		214E19C41BAC4EE600E3E8EE /* AEMusicSequence.m in Sources */ = {isa = PBXBuildFile; fileRef = 214E19C31BAC4EE600E3E8EE /* AEMusicSequence.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,8 @@
 		2129ECFA1BA038C7001EF50A /* Midis */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Midis; sourceTree = SOURCE_ROOT; };
 		2129ECFB1BA038C7001EF50A /* Presets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Presets; sourceTree = SOURCE_ROOT; };
 		2129ECFC1BA038C7001EF50A /* Sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sounds; sourceTree = SOURCE_ROOT; };
+		214E19C21BAC4EE600E3E8EE /* AEMusicSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEMusicSequence.h; sourceTree = "<group>"; };
+		214E19C31BAC4EE600E3E8EE /* AEMusicSequence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEMusicSequence.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,14 +131,8 @@
 			children = (
 				2129ECB41BA035DF001EF50A /* AppDelegate.h */,
 				2129ECB51BA035DF001EF50A /* AppDelegate.m */,
-				2129ECB71BA035DF001EF50A /* ViewController.h */,
-				2129ECB81BA035DF001EF50A /* ViewController.m */,
-				2129ECE71BA036DF001EF50A /* AESequencerChannel.h */,
-				2129ECE81BA036DF001EF50A /* AESequencerChannel.m */,
-				2129ECE91BA036DF001EF50A /* SequencerCell.h */,
-				2129ECEA1BA036DF001EF50A /* SequencerCell.m */,
-				2129ECEB1BA036DF001EF50A /* SequencerLayout.h */,
-				2129ECEC1BA036DF001EF50A /* SequencerLayout.m */,
+				214E19C61BAC4EF600E3E8EE /* Views */,
+				214E19C51BAC4EEE00E3E8EE /* Sequencer */,
 				2129ECBA1BA035DF001EF50A /* Main.storyboard */,
 				2129ECBF1BA035DF001EF50A /* LaunchScreen.xib */,
 				2129ECBD1BA035DF001EF50A /* Images.xcassets */,
@@ -179,6 +176,30 @@
 				2129ECF61BA03826001EF50A /* libTheAmazingAudioEngine.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		214E19C51BAC4EEE00E3E8EE /* Sequencer */ = {
+			isa = PBXGroup;
+			children = (
+				2129ECE71BA036DF001EF50A /* AESequencerChannel.h */,
+				2129ECE81BA036DF001EF50A /* AESequencerChannel.m */,
+				214E19C21BAC4EE600E3E8EE /* AEMusicSequence.h */,
+				214E19C31BAC4EE600E3E8EE /* AEMusicSequence.m */,
+			);
+			name = Sequencer;
+			sourceTree = "<group>";
+		};
+		214E19C61BAC4EF600E3E8EE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2129ECB71BA035DF001EF50A /* ViewController.h */,
+				2129ECB81BA035DF001EF50A /* ViewController.m */,
+				2129ECE91BA036DF001EF50A /* SequencerCell.h */,
+				2129ECEA1BA036DF001EF50A /* SequencerCell.m */,
+				2129ECEB1BA036DF001EF50A /* SequencerLayout.h */,
+				2129ECEC1BA036DF001EF50A /* SequencerLayout.m */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -302,6 +323,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2129ECB91BA035DF001EF50A /* ViewController.m in Sources */,
+				214E19C41BAC4EE600E3E8EE /* AEMusicSequence.m in Sources */,
 				2129ECEF1BA036DF001EF50A /* SequencerLayout.m in Sources */,
 				2129ECED1BA036DF001EF50A /* AESequencerChannel.m in Sources */,
 				2129ECB61BA035DF001EF50A /* AppDelegate.m in Sources */,

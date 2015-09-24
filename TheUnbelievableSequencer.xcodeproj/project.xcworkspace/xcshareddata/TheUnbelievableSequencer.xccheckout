@@ -22,7 +22,7 @@
 		<key>DA83E3E0B7BA6BA46D576847F09E829658CFA27E</key>
 		<string>../..</string>
 		<key>F1BC4876811AFC3F9EBAC1327B95940A459E2E4A</key>
-		<string>../../../../../zLibraries/TheAmazingAudioEngine</string>
+		<string>../../../zLibraries/TheAmazingAudioEngine</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/thepalebluedot/TheUnbelievableSequencer.git</string>
