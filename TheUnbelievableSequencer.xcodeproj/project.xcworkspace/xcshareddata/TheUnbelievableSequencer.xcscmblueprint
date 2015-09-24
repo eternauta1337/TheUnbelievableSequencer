@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "DA83E3E0B7BA6BA46D576847F09E829658CFA27E",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "F1BC4876811AFC3F9EBAC1327B95940A459E2E4A" : 0,
+    "DA83E3E0B7BA6BA46D576847F09E829658CFA27E" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "7BE0F9D1-A5A4-466D-B66B-0F7947CE98DF",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "F1BC4876811AFC3F9EBAC1327B95940A459E2E4A" : "zLibraries\/TheAmazingAudioEngine",
+    "DA83E3E0B7BA6BA46D576847F09E829658CFA27E" : "TheUnbelievableSequencer"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "TheUnbelievableSequencer",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "TheUnbelievableSequencer.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/thepalebluedot\/TheUnbelievableSequencer.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DA83E3E0B7BA6BA46D576847F09E829658CFA27E"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/TheAmazingAudioEngine\/TheAmazingAudioEngine.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F1BC4876811AFC3F9EBAC1327B95940A459E2E4A"
+    }
+  ]
+}

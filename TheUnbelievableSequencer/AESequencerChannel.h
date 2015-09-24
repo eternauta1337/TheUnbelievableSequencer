@@ -26,7 +26,7 @@
 - (void)stop;
 @property (nonatomic) float bpm;
 @property (nonatomic) float playrate;
-@property (readonly) float playbackPosition;
+@property float playbackPosition;
 @property (readonly) BOOL isPlaying;
 
 // Pattern.

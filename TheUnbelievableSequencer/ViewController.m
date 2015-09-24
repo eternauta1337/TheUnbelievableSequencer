@@ -162,7 +162,7 @@
 - (void)startTimer {
     
     // Query the sequencer position at a fixed time interval.
-    _timer = [NSTimer timerWithTimeInterval:0.05
+    _timer = [NSTimer timerWithTimeInterval:0.01
                                      target:self
                                    selector:@selector(onTimerTick:)
                                    userInfo:nil repeats:YES];
@@ -178,12 +178,25 @@
 
 - (void)onTimerTick:(NSTimer*)timer {
     [self updatePlayheadPosition];
+    [self compensateMusicPlayeriOS9LoopBug];
+}
+
+// iOS 9.0.1 BUG
+// Setting looping in MusicPlayer hangs the app
+// http://prod.lists.apple.com/archives/coreaudio-api/2015/Aug/msg00030.html
+// NOTE: looping is currently disabled in AESequencerChannel.m, toggleLooping()
+- (void)compensateMusicPlayeriOS9LoopBug {
+    NSLog(@"compensateMusicPlayeriOS9LoopBug() - pos: %f", _sequencer.playbackPosition);
+    if(_sequencer.playbackPosition >= 1.0) {
+        _sequencer.playbackPosition = 0;
+    }
 }
 
 - (void)updatePlayheadPosition {
     
     // Position playhead view.
-    float x = _sequencer.playbackPosition * _collectionView.contentSize.width;
+    float inLoop = _sequencer.playbackPosition - floorf(_sequencer.playbackPosition);
+    float x = inLoop * _collectionView.contentSize.width;
     _playheadView.frame = CGRectMake(x, 0, _playheadView.frame.size.width, _playheadView.frame.size.height);
 }
 

@@ -283,11 +283,16 @@
     MusicTimeStamp time;
     AECheckOSStatus(MusicPlayerGetTime(_player, &time), "Error getting position");
     
-    // Calculate position in loop.
+    // Return position in loops.
     float loopPos = (float)time / (float)_patternLengthInBeats;
-    loopPos = loopPos - floorf(loopPos);
-    
     return loopPos;
+}
+
+- (void)setPlaybackPosition:(float)playbackPosition {
+    
+    // Set position.
+    MusicTimeStamp time = _patternLengthInBeats * playbackPosition;
+    AECheckOSStatus(MusicPlayerSetTime(_player, time), "Error setting position");
 }
 
 - (void)setPlayrate:(float)playrate {
@@ -308,6 +313,11 @@
 // ---------------------------------------------------------------------------------------------------------
 
 - (void)toggleLooping:(BOOL)loop onSequence:(MusicSequence)sequence {
+    
+    // iOS 9.0.1 BUG
+    // Setting looping in MusicPlayer hangs the app
+    // http://prod.lists.apple.com/archives/coreaudio-api/2015/Aug/msg00030.html
+    return;
     
     // Get number of tracks.
     UInt32 numberOfTracks;
