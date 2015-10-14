@@ -12,7 +12,7 @@
 
 @interface AEMusicSequence : NSObject
 
-- (instancetype)initWithMidiFile:(NSURL*)fileURL resolution:(int)resolution numTracks:(int)numTracks;
+- (instancetype)initWithMidiFile:(NSURL*)fileURL resolution:(float)resolution numTracks:(int)numTracks;
 
 @property NSMutableDictionary *pattern;
 @property (readonly) int sequenceLengthInBeats;

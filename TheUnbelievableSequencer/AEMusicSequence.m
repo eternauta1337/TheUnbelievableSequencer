@@ -15,7 +15,7 @@
 #pragma mark - INIT
 // ---------------------------------------------------------------------------------------------------------
 
-- (instancetype)initWithMidiFile:(NSURL*)fileURL resolution:(int)resolution numTracks:(int)numTracks {
+- (instancetype)initWithMidiFile:(NSURL*)fileURL resolution:(float)resolution numTracks:(int)numTracks {
     self = [super init];
     
     _resolution = resolution;
@@ -180,8 +180,11 @@
             
             // Log note.
             UInt8 note = message->note;
+//            NSLog(@"note: %d", note);
             int noteSection = note - 36;
             int noteRow = (int)(timestamp * (1/_resolution));
+//            NSLog(@"_resolution: %f", _resolution);
+//            NSLog(@"row: %d", noteRow);
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:noteRow inSection:noteSection];
             _pattern[indexPath] = [NSNumber numberWithBool:YES];
         }
@@ -190,6 +193,8 @@
         MusicEventIteratorNextEvent(iterator);
         j++;
     }
+    
+    NSLog(@"pattern: %@", _pattern);
 }
 
 - (BOOL)isNoteOnAtIndexPath:(NSIndexPath*)indexPath {
@@ -209,6 +214,11 @@
 // ---------------------------------------------------------------------------------------------------------
 
 - (void)toggleLooping:(BOOL)loop onSequence:(MusicSequence)sequence {
+    
+    // iOS 9.0.1 BUG
+    // Setting looping in MusicPlayer hangs the app
+    // http://prod.lists.apple.com/archives/coreaudio-api/2015/Aug/msg00030.html
+    return;
     
     // Get number of tracks.
     UInt32 numberOfTracks;

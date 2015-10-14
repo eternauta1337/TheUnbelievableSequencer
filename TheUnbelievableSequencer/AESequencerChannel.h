@@ -12,9 +12,11 @@
 
 @interface AESequencerChannel : AEAudioUnitChannel
 
+- (instancetype)initWithSequence:(AEMusicSequence*)sequence preset:(NSURL*)preset;
+
 @property (nonatomic) float bpm;
 @property (nonatomic) float playrate;
-@property (readonly) float playbackPosition;
+@property float playbackPosition;
 @property (readonly) BOOL isPlaying;
 
 @property (nonatomic) AEMusicSequence *sequence;

@@ -52,18 +52,16 @@
 
 - (void)initTheUnbelievableSequencer {
     
-    // The sequencer is just like any other TAAE channel.
-    _sequencer = [[AESequencerChannel alloc] init];
-    [_audioController addChannels:@[_sequencer]];
-    
     // Load a sequence.
     NSURL *midiURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Midis/pattern1" ofType:@"mid"]];
     AEMusicSequence *sequence = [[AEMusicSequence alloc] initWithMidiFile:midiURL resolution:0.25 numTracks:5];
-    _sequencer.sequence = sequence;
     
     // Load a sound bank.
-    NSURL *presetURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Presets/SimpleDrums" ofType:@"aupreset"]];
-    _sequencer.preset = presetURL;
+    NSURL *preset = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Presets/SimpleDrums" ofType:@"aupreset"]];
+
+    // The sequencer is just like any other TAAE channel.
+    _sequencer = [[AESequencerChannel alloc] initWithSequence:sequence preset:preset];
+    [_audioController addChannels:@[_sequencer]];
 }
 
 - (void)initCollectionView {
@@ -166,7 +164,7 @@
 - (void)startTimer {
     
     // Query the sequencer position at a fixed time interval.
-    _timer = [NSTimer timerWithTimeInterval:0.05
+    _timer = [NSTimer timerWithTimeInterval:0.01
                                      target:self
                                    selector:@selector(onTimerTick:)
                                    userInfo:nil repeats:YES];
@@ -182,13 +180,22 @@
 
 - (void)onTimerTick:(NSTimer*)timer {
     [self updatePlayheadPosition];
+    [self compensateMusicPlayeriOS9LoopBug];
 }
 
 - (void)updatePlayheadPosition {
     
     // Position playhead view.
-    float x = _sequencer.playbackPosition * _collectionView.contentSize.width;
+    float inLoop = _sequencer.playbackPosition - floorf(_sequencer.playbackPosition);
+    float x = inLoop * _collectionView.contentSize.width;
     _playheadView.frame = CGRectMake(x, 0, _playheadView.frame.size.width, _playheadView.frame.size.height);
+}
+
+- (void)compensateMusicPlayeriOS9LoopBug {
+//    NSLog(@"compensateMusicPlayeriOS9LoopBug() - pos: %f", _sequencer.playbackPosition);
+    if(_sequencer.playbackPosition >= 1.0) {
+        _sequencer.playbackPosition = 0;
+    }
 }
 
 @end

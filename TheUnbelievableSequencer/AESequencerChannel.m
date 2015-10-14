@@ -18,7 +18,7 @@
 #pragma mark - INIT
 // ---------------------------------------------------------------------------------------------------------
 
-- (instancetype)init {
+- (instancetype)initWithSequence:(AEMusicSequence*)sequence preset:(NSURL*)preset {
     
     NSLog(@"AESequencerChannel - init()");
     
@@ -32,6 +32,9 @@
     // Create a MusicPlayer to control playback.
     AECheckOSStatus(NewMusicPlayer(&_player), "Error creating music player.");
     
+    self.sequence = sequence;
+    self.preset = preset;
+    
     return self;
 }
 
@@ -41,6 +44,11 @@
     // Keep a reference to the audio controller.
     // (knowledge of the audio graph is needed)
     _audioController = audioController;
+    
+    // If sequence was set before, when _audioController was not set.
+    if(_sequence) {
+        self.sequence = _sequence;
+    }
 }
 
 // ---------------------------------------------------------------------------------------------------------
@@ -69,11 +77,17 @@
     MusicTimeStamp time;
     AECheckOSStatus(MusicPlayerGetTime(_player, &time), "Error getting position");
     
-    // Calculate position in loop.
+    // Return position in loops.
     float loopPos = (float)time / (float)_sequence.sequenceLengthInBeats;
-    loopPos = loopPos - floorf(loopPos);
     
     return loopPos;
+}
+
+- (void)setPlaybackPosition:(float)playbackPosition {
+    
+    // Set position.
+    MusicTimeStamp time = _sequence.sequenceLengthInBeats * playbackPosition;
+    AECheckOSStatus(MusicPlayerSetTime(_player, time), "Error setting position");
 }
 
 - (void)setPlayrate:(float)playrate {
@@ -95,6 +109,8 @@
 
 - (void)setSequence:(AEMusicSequence *)sequence {
     _sequence = sequence;
+    
+    if(!_audioController) return;
     
     // Use a proxy to route notes from the player to the sampler.
     AECheckOSStatus(MusicSequenceSetAUGraph(_sequence.coreSequence, _audioController.audioGraph), "Error connecting sampler to sequence.");
